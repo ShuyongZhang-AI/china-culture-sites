@@ -8,6 +8,30 @@
   html, body { margin: 0; padding: 0; height: 100%; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif; }
   #map { position: absolute; inset: 0; width: 100%; height: 100vh; }
 
+  /* ---------- 页面加载状态 ---------- */
+  #loader {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(252, 250, 245, 0.98);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.5s ease;
+  }
+  #loader.hidden { opacity: 0; pointer-events: none; }
+  .hourglass {
+    position: relative; width: 56px; height: 84px; margin-bottom: 14px;
+  }
+  .hourglass::before, .hourglass::after {
+    content: ''; position: absolute; left: 0; right: 0; height: 36px;
+    background: #a93526;
+  }
+  .hourglass::before { top: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .hourglass::after { bottom: 0; clip-path: polygon(0 100%, 100% 100%, 50% 0%); }
+  .sand {
+    position: absolute; left: 50%; top: 6px; width: 4px; height: 72px;
+    background: #a93526; transform: translateX(-50%);
+    animation: sandFall 2s infinite linear;
+  }
+  @keyframes sandFall { to { top: 100%; } }
+
   /* ---------- 顶部标题 ---------- */
   .brand {
     position: absolute; top: 16px; left: 16px; z-index: 1000;
@@ -95,8 +119,15 @@
   .slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
   .slide img {
     width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block;
-    -webkit-user-drag: none; user-select: none; pointer-events: none;
+    -webkit-user-drag: none; user-select: none; pointer-events: auto;
+    transition: transform 0.35s ease;
   }
+  .slide img.img-full {
+    position: fixed; inset: 0; z-index: 2000;
+    width: 100vw !important; height: 100vh !important; aspect-ratio: auto !important;
+    object-fit: contain; background: #000; cursor: zoom-out;
+  }
+  .slide img.img-maxhint::after { content: '双击放大'; }
   .slide .cap {
     position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 8px;
     background: linear-gradient(to top, rgba(20,17,13,0.78), rgba(20,17,13,0));
@@ -160,6 +191,24 @@
   }
   .detail .addr b { color: #4a4436; }
 
+  /* ---------- 名人作品扩展展示 ---------- */
+  .extra { margin: 14px 0 4px; border-top: 1px solid #e4dbc8; padding-top: 10px; }
+  .extra .sec { font-size: 13px; color: #a93526; letter-spacing: 3px; margin: 12px 0 8px; display: flex; align-items: center; gap: 8px; }
+  .extra .sec::after { content: ""; flex: 1; height: 1px; background: #e4dbc8; }
+  /* 画廊（画家/书法家作品） */
+  .works { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .work { flex: 0 0 calc(50% - 4px); position: relative; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; border: 1px solid #d6c9b3; background: #e8e0cf; cursor: pointer; }
+  .work img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+  .work .wcap { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 8px; background: linear-gradient(to top, rgba(20,17,13,0.75), rgba(20,17,13,0)); color: #fff; font-size: 10px; line-height: 1.4; }
+  /* 诗文（诗人/散文家） */
+  .writings { margin: 8px 0; }
+  .writing { margin: 10px 0; padding: 10px 12px; background: #faf6ec; border-radius: 8px; border: 1px solid #efe8d8; }
+  .writing .wtitle { font-size: 14px; color: #2b2620; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: baseline; }
+  .writing .wtype { font-size: 10px; color: #a93526; letter-spacing: 1px; padding: 1px 6px; border-radius: 8px; background: #f2ecdd; }
+  .writing .classical { font-size: 13.5px; color: #454036; line-height: 1.8; margin: 4px 0 4px; text-align: justify; font-family: "Noto Serif SC", "Source Han Serif SC", serif; }
+  .writing .vernacular { font-size: 12.5px; color: #6b5f49; line-height: 1.7; margin: 4px 0 8px; border-left: 3px solid #b39b6a; padding-left: 10px; text-align: justify; font-style: italic; }
+  .writing .analysis { font-size: 11.5px; color: #8a7f68; line-height: 1.6; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #d6c9b3; }
+
   /* ---------- 图例 & 控件 ---------- */
   .legend {
     position: absolute; left: 320px; bottom: 16px; z-index: 1000;
@@ -220,6 +269,10 @@
 <script src="https://map.qq.com/api/gljs?v=1.exp"></script>
 </head>
 <body>
+<div id="loader">
+  <div class="hourglass"></div>
+  <div style="margin-top:14px;font-size:13px;color:#7a6f5d;letter-spacing:2px;">加 载 中</div>
+</div>
 <div id="map"></div>
 
 <div class="brand">
@@ -875,7 +928,11 @@ const SITES = [
       '王羲之，东晋书法家，被后世尊为「书圣」。东晋永和九年（353年）三月初三，他与谢安、孙绰等四十一位名士雅集于会稽山阴之兰亭，曲水流觞、饮酒赋诗，乘兴写下被誉为「天下第一行书」的《兰亭集序》，「仰观宇宙之大，俯察品类之盛」传诵千古。',
       '今日兰亭景区内有鹅池碑（相传「鹅」字出王羲之、「池」字出王献之，父子合璧）、曲水流觞处、御碑亭等景观。每年农历三月初三在此举办兰亭书法节，中外书家雅集挥毫，是书法文化活的圣地。'
     ],
-    hl: ['「天下第一行书」《兰亭集序》诞生地', '鹅池父子合璧碑', '每年三月三兰亭书法节']
+    hl: ['「天下第一行书」《兰亭集序》诞生地', '鹅池父子合璧碑', '每年三月三兰亭书法节'],
+    works: [
+      { src: 'images/photos/lanting-work1.jpg', cap: '王羲之《兰亭集序》', type: 'calligraphy' },
+      { src: 'images/photos/lanting-work2.jpg', cap: '王羲之行书《兰亭序卷》', type: 'calligraphy' }
+    ]
   },
   {
     id: 'shenyuan', prov: 'zhejiang', cat: 'culture',
@@ -2313,7 +2370,11 @@ const SITES = [
       '1955年文化部为齐白石购置这处雨儿胡同的小院，老人在这里住了不到两年，却留下了大量画作与生活痕迹。院子不大，北房三间，画案临窗，笔洗、颜料碟与印章按他的习惯摆放。',
       '齐白石五十七岁定居北京，以"衰年变法"开创红花墨叶一派，把虾、蟹、蛙、蝌蚪画成了中国画最生动的符号。纪念馆展出他的原作复制品、刻刀与自用印章，能看到一位木匠出身的画家如何把民间趣味带进文人画。'
     ],
-    hl: ['"衰年变法"的北京居所', '画案与自用印章', '南锣鼓巷雨儿胡同']
+    hl: ['"衰年变法"的北京居所', '画案与自用印章', '南锣鼓巷雨儿胡同'],
+    works: [
+      { src: 'images/photos/bj-qibaishi-work1.jpg', cap: '齐白石《虾》', type: 'painting' },
+      { src: 'images/photos/bj-qibaishi-work2.jpg', cap: '齐白石《萝卜白菜》', type: 'painting' }
+    ]
   },
   {
     id: 'bj-xubeihong', prov: 'beijing', cat: 'memorial',
@@ -2326,7 +2387,11 @@ const SITES = [
       '徐悲鸿1953年去世后，夫人廖静文将其作品与收藏悉数捐给国家，1954年建馆。现馆藏油画、国画、素描两千余件，包括《愚公移山》《田横五百士》《奔马》等代表作。',
       '纪念馆按时间顺序陈列他留学巴黎、归国办学、抗战义卖的一生。他把西方素描的造型方法引入中国画教学，主张"尽精微，致广大"，中央美术学院的教学体系即由他奠基。展厅里的奔马图稿，能看出他反复修改马腿结构的痕迹。'
     ],
-    hl: ['《愚公移山》《奔马》原作', '两千余件捐赠作品', '中国现代美术教育奠基']
+    hl: ['《愚公移山》《奔马》原作', '两千余件捐赠作品', '中国现代美术教育奠基'],
+    works: [
+      { src: 'images/photos/bj-xubeihong-work1.jpg', cap: '徐悲鸿《奔马》', type: 'painting' },
+      { src: 'images/photos/bj-xubeihong-work2.jpg', cap: '徐悲鸿《奔马》国画', type: 'painting' }
+    ]
   },
   {
     id: 'bj-caoxueqin', prov: 'beijing', cat: 'memorial',
@@ -3548,7 +3613,11 @@ const SITES = [
       '太白楼始建于唐代，原为贺兰氏酒楼，相传李白于开元二十四年（736）携家寓居任城（今济宁），常在此饮酒赋诗，后人为纪念他改称太白楼。现存建筑为明洪武年间重建，两层重檐，歇山式顶。',
       '楼内陈列李白生平、诗作版本与历代碑刻，其中《清平调》三首石刻最为著名。李白在济宁居住二十余年，把家安在任城，女儿平阳、儿子伯禽都在这里长大。楼前的古槐与运河故道，是他"长安市上酒家眠"之外另一段更日常的生活现场。'
     ],
-    hl: ['李白寓居任城二十余年', '明代重檐楼阁', '《清平调》石刻']
+    hl: ['李白寓居任城二十余年', '明代重檐楼阁', '《清平调》石刻'],
+    writings: [
+      { title: '《静夜思》', type: '五言绝句', classical: '床前明月光，\n疑是地上霜。\n举头望明月，\n低头思故乡。', vernacular: '床前明亮的月光，\n怀疑是地上的霜。\n我抬头望向明月，\n又低头思念故乡。', analysis: '李白早期作品，四句二十字，以极简笔触写出游子对故乡的深深思念，"举""低"两个动作，由远及近，层层递进，情感真挚自然。' },
+      { title: '《将进酒》·节选', type: '古风', classical: '君不见，\n黄河之水天上来，\n奔流到海不复回。\n君不见，\n高堂明镜悲白发，\n朝如青丝暮成雪。', vernacular: '你没有看到吗，\n黄河的水从天上奔流而来，\n一入大海就再也回不来了。\n你没有看到吗，\n高堂明镜为悲伤白发而悲叹，\n早晨如青丝，晚上就变成了白雪。', analysis: '李白代表作，豪放奔放，劝人趁年轻多饮酒，不要让金樽空对月，表达了诗人不羁的性格和对人生的感慨。' }
+    ]
   },
   {
     id: 'sd-sunzi', prov: 'shandong', cat: 'memorial',
@@ -8731,7 +8800,11 @@ const SITES = [
       '八大山人纪念馆位于南昌市青山湖区，是为纪念明末清初画家朱耷而建。朱耷字雪个，号八大山人，江西南昌人，擅长山水、花鸟，风格独特，被誉为“扬州八怪”之首。纪念馆收藏了朱耷的大量作品。',
       '八大山人是明末清初的艺术大师，纪念馆是欣赏其作品、了解其艺术成就的重要场所。'
     ],
-    hl: ['扬州八怪之首', '山水、花鸟', '八大山人作品']
+    hl: ['扬州八怪之首', '山水、花鸟', '八大山人作品'],
+    works: [
+      { src: 'images/photos/jx-bada-work1.jpg', cap: '八大山人《鸟图》', type: 'painting' },
+      { src: 'images/photos/jx-bada-work2.jpg', cap: '八大山人《鸟》', type: 'painting' }
+    ]
   },
   {
     id: 'jx-jiangwan', prov: 'jiangxi', cat: 'culture',
@@ -8810,7 +8883,10 @@ const SITES = [
       '杜甫故里位于洛阳市偃师区，是杜甫的出生地。杜甫字子美，河南巩县人，唐代大诗人，被誉为“诗圣”。他一生忧国忧民，诗作沉郁顿挫，留下了《春望》《登高》等千古名篇。故里保存了杜甫生平事迹。',
       '杜甫是诗圣，故里是纪念杜甫、弘扬唐代诗歌文化的重要场所。'
     ],
-    hl: ['诗圣杜甫', '《春望》《登高》', '忧国忧民']
+    hl: ['诗圣杜甫', '《春望》《登高》', '忧国忧民'],
+    writings: [
+      { title: '《春望》', type: '七言律诗', classical: '国破山河在，\n城春草木深。\n感时花溅泪，\n恨别鸟惊心。\n烽火连三月，\n家书抵万金。\n白头搔更短，\n测不欲笔簪。', vernacular: '国家虽然破碎，山河依然存在；\n城市里的春天，草木愈发浓密。\n触景生情花溅泪，\n离别之恨鸟儿也惊心。\n烽火连续三月不断，\n一封家书抵得上万两黄金。\n白发越挠越短，\n测不愿再插花簪。', analysis: '杜甫安史之乱时期所作，"国破山河在，城春草木深"以对比手法写出国破家亡的悲凉，"感时花溅泪，恨别鸟惊心"人鸟同悲，情感深沉，被誉为"史诗之巅"。' }
+    ]
   },
   {
     id: 'hn-zhangheng', prov: 'henan', cat: 'memorial',
@@ -10458,7 +10534,10 @@ const SITES = [
       '欧阳修故居位于江西省吉安市庐陵区，是北宋文学家欧阳修的出生地。欧阳修字永修，号醉翁、六一居士，与苏轼等合称“欧苏”，是北宋“八大散文家”之一。故居保存了欧阳修生平事迹。',
       '欧阳修是北宋重要的文学家、史学家，其散文成就极高。欧阳修故居是了解北宋宋代文学文化的重要场所。'
     ],
-    hl: ['欧阳修故居', '八大散文家', '庐陵文化']
+    hl: ['欧阳修故居', '八大散文家', '庐陵文化'],
+    writings: [
+      { title: '《醉翁亭记》·节选', type: '散文（古文）', classical: '环滁皆山也。其西南诸峰，林林竹菉皆然，独天目山一点，如藉在天际，向北麦荣，彘鸡杼槠，犬彘畎亩，蜿蜒几二十里，皆在杯中。', vernacular: '滁州周围全是山。西南面的各个山峰，树林和竹子都长得茂密，只有天目山那个山尖，像铺在天边一样，朝向北面麦荣村，有鸡猪犬猪等畜禽和庄稼，绵延几十里，都在酒杯里面。', analysis: '欧阳修名篇，以"醉翁之意不在酒，在乎山水之间"著名，写作者与民同乐的情怀，寓意超脱，被誉为唐宋八大家散文之冠。' }
+    ]
   },
   {
     id: 'jx-zenggong', prov: 'jiangxi', cat: 'culture',
@@ -10484,7 +10563,11 @@ const SITES = [
       '欧阳询故里位于湖北省潜江市，是唐代书法家欧阳询的出生地。欧阳询字信本，号孤山居士，是唐代著名书法家，创立“欧阳体”楷书。故里保存了欧阳询生平事迹和书法艺术遗存。',
       '欧阳询是唐代著名的书法家，其楷书结构严谨，笔力遒劲。欧阳询故里是了解中国书法艺术的重要场所。'
     ],
-    hl: ['欧阳询故里', '欧阳体书法', '唐代书法']
+    hl: ['欧阳询故里', '欧阳体书法', '唐代书法'],
+    works: [
+      { src: 'images/photos/hb-ouyangxun-work1.jpg', cap: '欧阳询《九成宫醴泉铭》', type: 'calligraphy' },
+      { src: 'images/photos/hb-ouyangxun-work2.jpg', cap: '欧阳询楷书《九成宫醴泉铭》', type: 'calligraphy' }
+    ]
   },
   {
     id: 'hb-lisiguang', prov: 'hubei', cat: 'memorial',
@@ -10562,7 +10645,10 @@ const SITES = [
       '徐志摩故居位于浙江省嘉兴市南湖区，是现代诗人徐志摩的出生地。徐志摩字章钊，号陆小曼，是“新月派”代表诗人，著《再别康桥》等作品。故居保存了徐志摩生平事迹和南湖文化遗存。',
       '徐志摩是中国现代著名的诗人，其诗歌风格优美。徐志摩故居是了解现代文学和南湖文化的重要场所。'
     ],
-    hl: ['徐志摩故居', '《再别康桥》', '新月派']
+    hl: ['徐志摩故居', '《再别康桥》', '新月派'],
+    writings: [
+      { title: '《再别康桥》', type: '现代诗', classical: '那一年，我柔软的青葱，\n轻轻地摇摆，\n在康桥的波光里，\n我告别了剑桥。\n\n那一年，我柔软的青葱，\n轻轻地摇摆，\n在康河的波光里，\n我的影子，\n被溅起的波纹，\n划得碎成万千。', vernacular: '那一年，我年轻柔软的青春，\n轻轻地摇摆，\n在康桥的波光里，\n我告别了剑桥。\n\n那一年，我年轻柔软的青春，\n轻轻地摇摆，\n在康河的波光里，\n我的影子，\n被溅起的波纹，\n划碎成万千。', analysis: '徐志摩代表作，以柔美婉转的笔触写别离之情，"柔软的青葱"与"波纹"的意象，营造出淡雅忧伤的氛围，表达了诗人对剑桥岁月的眷恋和对告别的不舍。' }
+    ]
   },
   {
     id: 'sh-bajin', prov: 'shanghai', cat: 'culture',
@@ -13271,6 +13357,37 @@ function detailShots(s) {
   };
 }
 
+/* ---------- 名人作品扩展：画家展画作、书法家展书法、诗人/散文家展诗文 ---------- */
+function renderExtra(s) {
+  var out = '';
+  /* 画家/书法家：展示作品图片（works 数组） */
+  if (s.works && s.works.length) {
+    var isPaint = /画家|绘画|国画|油画|泼墨/.test(s.role || '');
+    out += '<div class="extra"><div class="sec">' + (isPaint ? '代 表 作 画' : '代 表 书 法') + '</div>';
+    out += '<div class="works">';
+    s.works.forEach(function (w) {
+      out += '<div class="work" ondblclick="toggleImgFull(this.firstElementChild)" title="双击放大/缩小">';
+      out += '<img src="' + (w.src || '') + '" alt="' + (w.cap || s.name) + '" loading="lazy" ondblclick="toggleImgFull(this)" title="双击放大/缩小" onerror="this.closest(\'.work\').style.display=\'none\'">';
+      out += '<div class="wcap">' + (w.cap || s.name) + '</div></div>';
+    });
+    out += '</div></div>';
+  }
+  /* 诗人/散文家：展示诗文、古文白话对照与解析（writings 数组） */
+  if (s.writings && s.writings.length) {
+    out += '<div class="extra"><div class="sec">代 表 诗 文</div><div class="writings">';
+    s.writings.forEach(function (w) {
+      out += '<div class="writing">';
+      out += '<div class="wtitle"><span>' + (w.title || '') + '</span><span class="wtype">' + (w.type || '诗文') + '</span></div>';
+      if (w.classical) out += '<div class="classical">' + w.classical + '</div>';
+      if (w.vernacular) out += '<div class="vernacular">『白话』' + w.vernacular + '</div>';
+      if (w.analysis) out += '<div class="analysis">『解析』' + w.analysis + '</div>';
+      out += '</div>';
+    });
+    out += '</div></div>';
+  }
+  return out;
+}
+
 function renderDetail(id) {
   const s = SITES.find(function (x) { return x.id === id; });
   if (!s) return;
@@ -13283,6 +13400,7 @@ function renderDetail(id) {
     + '<div class="slides" id="slides" onscroll="onSlidesScroll()">'
     + shots.map(function (p, i) {
       return '<div class="slide"><img src="' + p.src + '" alt="' + s.name + '" loading="' + (i ? 'lazy' : 'eager') + '"'
+        + ' ondblclick="toggleImgFull(this)" title="双击放大/缩小"'
         + ' onerror="this.closest(\'.slide\').style.display=\'none\'">'
         + '<div class="cap"><span>' + (p.cap || s.name) + '</span>'
         + '<span class="crd">' + (p.credit || '') + '</span></div></div>';
@@ -13306,6 +13424,7 @@ function renderDetail(id) {
     + s.desc.map(function (p) { return '<p>' + p + '</p>'; }).join('')
     + '<div class="sec">观 光 看 点</div>'
     + '<ul class="hl">' + s.hl.map(function (h) { return '<li>' + h + '</li>'; }).join('') + '</ul>'
+    + renderExtra(s)
     + '<div class="addr"><b>地址</b><br>' + s.address + '</div>'
     + '</div>';
   const d = document.getElementById('detail');
@@ -13409,6 +13528,23 @@ function closeDetail() {
   rebuildMarkers();
   rebuildLabels();
   renderList();
+  /* 关闭详情时重置所有放大图片 */
+  document.querySelectorAll('.slide img.img-full').forEach(function (img) {
+    img.classList.remove('img-full');
+  });
+}
+
+/* 图片双击放大/缩小（全屏显示，再双击退回） */
+function toggleImgFull(img) {
+  if (img.classList.contains('img-full')) {
+    img.classList.remove('img-full');
+  } else {
+    /* 先关闭其他放大图片 */
+    document.querySelectorAll('.slide img.img-full').forEach(function (x) {
+      x.classList.remove('img-full');
+    });
+    img.classList.add('img-full');
+  }
 }
 
 function setFilter(k) {
@@ -13493,6 +13629,14 @@ updateHeader();
     }
   }, 500);
 })();
+
+/* 页面及资源加载完成后隐藏加载状态沙漏 */
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    var loader = document.getElementById('loader');
+    if (loader) loader.classList.add('hidden');
+  }, 700);
+});
 </script>
 </body>
 </html>
