@@ -1237,6 +1237,23 @@ const SITES = [
     hl: ['中国现代漫画的开创者', '弘一法师的弟子', '京杭大运河畔的石门湾']
   },
   {
+    id: 'shenzengzhi-residence', prov: 'zhejiang', cat: 'memorial',
+    name: '沈曾植故居',
+    person: '沈曾植（1850—1922）',
+    role: '晚清学者 · 诗人 · 书法家',
+    city: '浙江 · 嘉兴', address: '嘉兴市南湖区姚家埭，紫阳街附近（地图标注为近似位置；门牌资料有1号、11号、21号等不同记载，请以现场为准）',
+    lat: 30.7607, lng: 120.7510,
+    desc: [
+      '沈曾植，字子培，晚号寐叟，嘉兴籍，生于北京，是清末民初学者、诗人和书法家。1880年中进士，曾任刑部官员及安徽提学使等职。他治学广博，研究刑律、辽金元史、边疆舆地与中外交通史，著作有《汉律辑补》《蒙古源流笺证》等。1910年告病归里，晚年亦居上海，寓所名海日楼。',
+      '故居位于嘉兴天主堂南侧，建于清末，为坐北朝南的三进两层砖木住宅，走马堂楼与庭院体现江南宅第格局。第一进驾浮阁陈列其塑像和手书《文心雕龙·原道篇》；第二进晁采楼介绍其生平和学术。后人于1958年捐出故居，1999年至2001年修缮开放，2011年列为浙江省文物保护单位。关于门牌号，各资料记载不一，标注仅供大致定位。',
+      '沈曾植兼擅诗、书，诗歌与同光体诗风相关，作品汇为《海日楼诗集》；书法博采汉隶、北碑、章草与明末书家笔意，以草书尤著。故宫藏《行书黄山谷诗轴》笔力劲峭、章法欹侧：轴中诗是宋代黄庭坚所作，由沈曾植书写，并非沈的原创诗。'
+    ],
+    hl: ['驾浮阁与晁采楼', '走马堂楼与江南宅第', '《海日楼诗集》与碑帖融合书法'],
+    works: [
+      {src:'images/photos/shenzengzhi-calligraphy.jpg', cap:'沈曾植《行书黄山谷诗轴》 · 故宫博物院藏（缩图；所书为黄庭坚诗）', type:'calligraphy', source:'https://www.dpm.org.cn/collection/handwriting/228235.html', credit:'故宫博物院数字图像；作品公有领域，图像再利用请参见许可说明', license:'https://commons.wikimedia.org/wiki/File:%E6%B2%88%E6%9B%BE%E6%A4%8D%E8%A1%8C%E4%B9%A6%E8%AF%97%E8%BD%B4.png'}
+    ]
+  },
+  {
     id: 'zhushenghao', prov: 'zhejiang', cat: 'memorial',
     name: '朱生豪故居',
     person: '朱生豪（1912—1944）',
@@ -11096,6 +11113,24 @@ const REGIONS = {
 
 /* 经核对的作品补充：同一人物的不同纪念地点可各自展示。 */
 const SUPPLEMENTAL_WRITINGS = {
+  "shenzengzhi-residence": [
+    {
+      "title": "《还家杂诗》（来躅循未遍）",
+      "type": "古诗",
+      "classical": "来躅循未遍，去軨展方遒。居家翻若客，儿去翁难留。\n顷刻蔷薇花，舒英送行舟。杜鹃如惜别，一雨皆垂头。\n后阁待支楹，前园计开畴。贻书慰老友，来月煎茶谋。\n即事有增益，随缘共绸缪。吾生托性海，安往非虚舟。",
+      "vernacular": "归来的足迹还没有走遍，离去的车行又已催人启程。在家反倒像客人，儿子离去，老人也难以留住。转眼间蔷薇舒展花瓣，像在送别行舟；杜鹃花仿佛也珍惜离别，一场雨后都低下了头。后面的楼阁还等待支柱修缮，前园计划开辟田地。写信安慰老友，约定下月煎茶相聚。眼前事随时有所增添，且顺着缘分共同筹划；我的一生寄托于广阔的性海，到哪里不是一叶虚舟？",
+      "analysis": "以归家又别、花雨送行写乡居与亲情，后半转入修园、访友和对人生的思索。「軨」借指车，「性海」「虚舟」含佛道思想。此篇在不同整理本中次序有异，故以首句标识。",
+      "source": "https://zh.wikisource.org/wiki/%E6%99%9A%E6%99%B4%E7%B0%83%E8%A9%A9%E5%8C%AF/%E5%8D%B7%E4%B8%80%E7%99%BE%E4%B8%83%E5%8D%81%E4%B8%89"
+    },
+    {
+      "title": "《乙卯五月重至西湖口号》（其一）",
+      "type": "古诗",
+      "classical": "来趁西湖五月凉，凭阑尽日醉湖光。\n圣因寺古佛无语，一杵残钟摇夕阳。",
+      "vernacular": "趁着五月的清凉来到西湖，整日倚栏陶醉于湖光。古老的圣因寺里佛像默然，一声余钟在夕阳中回荡。",
+      "analysis": "以西湖的清凉、古寺的寂静和晚钟声，写出闲适中含有苍茫之感的暮景。",
+      "source": "https://zh.wikisource.org/wiki/%E6%99%9A%E6%99%B4%E7%B0%83%E8%A9%A9%E5%8C%AF/%E5%8D%B7%E4%B8%80%E7%99%BE%E4%B8%83%E5%8D%81%E4%B8%89"
+    }
+  ],
   "zhangpu-residence": [
     {
       "title": "《五人墓碑记》",
@@ -11605,6 +11640,11 @@ const MODERN_WRITING_KEYS = {
 /* ================= 实景照片（维基共享资源，构建脚本注入） ================= */
 /* ==PHOTOS-START== */
 const PHOTOS = {
+  "shenzengzhi-residence": [
+    {src:"images/photos/shenzengzhi-residence.jpg",cap:"故居第一进驾浮阁（2013年，缩图）",credit:"猫猫的日记本 · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Former_Residence_of_Shen_Cengzhi_03_2013-11.JPG",license:"https://creativecommons.org/licenses/by-sa/3.0/"},
+    {src:"images/photos/shenzengzhi-residence-exterior.jpg",cap:"故居第一进外侧（2013年）",credit:"猫猫的日记本 · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Former_Residence_of_Shen_Cengzhi_06_2013-11.JPG",license:"https://creativecommons.org/licenses/by-sa/3.0/"},
+    {src:"images/photos/shenzengzhi-residence-interior.jpg",cap:"故居第一进内景（2013年，缩图）",credit:"猫猫的日记本 · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Former_Residence_of_Shen_Cengzhi_07_2013-11.JPG",license:"https://creativecommons.org/licenses/by-sa/3.0/"}
+  ],
   "zhangpu-residence": [
     {src:"images/photos/zhangpu-residence.jpg",cap:"张溥宅庭院（缩小）",credit:"Cangminzho · CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:%E5%BC%A0%E6%BA%A5%E5%AE%85_%E2%80%9C%E5%9B%9B%E6%B0%B4%E5%BD%92%E5%A0%82%E2%80%9D.jpg",license:"https://creativecommons.org/licenses/by-sa/4.0/"}
   ],
