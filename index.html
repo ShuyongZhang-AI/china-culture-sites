@@ -191,6 +191,61 @@
   }
   .detail .addr b { color: #4a4436; }
 
+  /* ---------- 地图中央弹出大图覆盖层 ---------- */
+  #imgModal {
+    position: fixed; inset: 0; z-index: 3000;
+    background: rgba(10, 8, 6, 0.92);
+    display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  #imgModal.open { display: flex; }
+  #imgModal .modal-close {
+    position: absolute; top: 18px; right: 24px; z-index: 10;
+    width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.12); color: #fff; font-size: 22px; line-height: 44px;
+    text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  }
+  #imgModal .modal-close:hover { background: rgba(255,255,255,0.25); }
+  #imgModal .modal-img {
+    max-width: 92vw; max-height: 88vh; object-fit: contain;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6); border-radius: 8px;
+    cursor: zoom-out;
+  }
+  #imgModal .modal-cap {
+    position: absolute; bottom: 30px; left: 0; right: 0; z-index: 5;
+    color: #fff; font-size: 13px; text-align: center; letter-spacing: 1px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+
+  /* ---------- 名人作品专区（与地点实景分离） ---------- */
+  .extra-section { margin: 16px 0 4px; border-top: 1px solid #e4dbc8; padding-top: 12px; }
+  .extra-section .sec { font-size: 13px; color: #a93526; letter-spacing: 3px; margin: 12px 0 10px; display: flex; align-items: center; gap: 8px; }
+  .extra-section .sec::after { content: ""; flex: 1; height: 1px; background: #e4dbc8; }
+  .extra-section .works { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .extra-section .work { flex: 0 0 calc(50% - 4px); position: relative; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; border: 1px solid #d6c9b3; background: #e8e0cf; cursor: pointer; }
+  .extra-section .work img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+  .extra-section .work .wcap { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 8px; background: linear-gradient(to top, rgba(20,17,13,0.75), rgba(20,17,13,0)); color: #fff; font-size: 10px; line-height: 1.4; }
+
+  /* ---------- 诗文专区 ---------- */
+  .extra-section .writings { margin: 8px 0; }
+  .extra-section .writing { margin: 10px 0; padding: 10px 12px; background: #faf6ec; border-radius: 8px; border: 1px solid #efe8d8; }
+  .extra-section .writing .wtitle { font-size: 14px; color: #2b2620; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: baseline; }
+  .extra-section .writing .wtype { font-size: 10px; color: #a93526; letter-spacing: 1px; padding: 1px 6px; border-radius: 8px; background: #f2ecdd; }
+  .extra-section .writing .classical { font-size: 13.5px; color: #454036; line-height: 1.8; margin: 4px 0 4px; text-align: justify; font-family: "Noto Serif SC", "Source Han Serif SC", serif; white-space: pre-wrap; }
+  .extra-section .writing .vernacular { font-size: 12.5px; color: #6b5f49; line-height: 1.7; margin: 4px 0 8px; border-left: 3px solid #b39b6a; padding-left: 10px; text-align: justify; font-style: italic; }
+  .extra-section .writing .analysis { font-size: 11.5px; color: #8a7f68; line-height: 1.6; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #d6c9b3; }
+
+  /* ---------- 名人介绍可折叠 ---------- */
+  .desc-wrap { position: relative; margin: 0 0 10px; }
+  .desc-wrap .desc-collapsed { overflow: hidden; max-height: 78px; }
+  .desc-wrap .desc-expanded { max-height: none; }
+  .btn-desc-more {
+    display: inline-block; margin-top: 6px; font-size: 12px; color: #a93526;
+    cursor: pointer; text-decoration: underline; padding: 4px 10px;
+    border: 1px solid #e4dbc8; border-radius: 12px; background: #faf6ec;
+  }
+  .btn-desc-more:hover { background: #efe8d8; }
+
   /* ---------- 名人作品扩展展示 ---------- */
   .extra { margin: 14px 0 4px; border-top: 1px solid #e4dbc8; padding-top: 10px; }
   .extra .sec { font-size: 13px; color: #a93526; letter-spacing: 3px; margin: 12px 0 8px; display: flex; align-items: center; gap: 8px; }
@@ -294,6 +349,12 @@
 </div>
 
 <aside class="detail" id="detail"></aside>
+
+<div id="imgModal">
+  <button class="modal-close" onclick="closeImgModal()">✕</button>
+  <img id="modalImg" class="modal-img" src="" alt="" ondblclick="toggleImgModal()">
+  <div class="modal-cap" id="modalCap"></div>
+</div>
 
 <div class="legend" id="legend"></div>
 
@@ -1189,10 +1250,14 @@ const SITES = [
     city: '浙江 · 嘉善', address: '嘉兴嘉善县魏塘街道花园路178号',
     lat: 30.8310, lng: 120.9310, img: 'images/meihuaan.jpg',
     desc: [
-      '吴镇，字仲圭，号梅花道人，嘉善魏塘人，「元四家」之一。他一生清贫，隐居卖卜为生，笔墨沉郁湿润，独爱画《渔父图》，「洞庭湖上晚风生」的渔隐之趣是其精神写照。与盛懋为邻而门前冷落，他自信「二十年后不复尔」，终成画史佳话。',
-      '吴镇生前自题「梅花和尚之墓」，梅花庵即其墓祠所在，历六百余年保存至今，是中国书画史上罕见的画家自选墓地，亦为历代文人凭吊的书画圣地。'
+      '吴镇，字仲圭，号梅花道人，嘉善魏塘人，「元四家」之一。他一生清贫，隐居卖卜为生，笔墨沉郁湿润，独爱画《渔父图》，「洞庭湖上晚风生」的渔隐之趣是其精神写照。与盛懋为邻而门前冷落，他自信「二十年后不复尔」，终成画史佳话。吴镇不事王侯，终身未娶，以画卖卜为生，与友人盛懋、朱淇等交往甚密，被元代文人誉为「画圣」。',
+      '吴镇生前自题「梅花和尚之墓」，梅花庵即其墓祠所在，历六百余年保存至今，是中国书画史上罕见的画家自选墓地，亦为历代文人凭吊的书画圣地。其笔下渔翁孤舟、江阔天高，成为元代山水画的重要范式，对后世明清山水画影响深远。'
     ],
-    hl: ['「元四家」唯一自选址墓', '六百年梅花庵', '《渔父图》与渔隐精神']
+    hl: ['「元四家」唯一自选址墓', '六百年梅花庵', '《渔父图》与渔隐精神'],
+    works: [
+      { src: 'images/photos/meihuaan-work1.jpg', cap: '吴镇《渔父图》', type: 'painting' },
+      { src: 'images/photos/meihuaan-work2.jpg', cap: '吴镇《渔隐图》', type: 'painting' }
+    ]
   },
   {
     id: 'aiqing', prov: 'zhejiang', cat: 'memorial',
@@ -2687,10 +2752,14 @@ const SITES = [
     city: '天津 · 河北', address: '天津市河北区海河东路',
     lat: 39.1436592, lng: 117.1903175,
     desc: [
-      '李叔同出生于天津盐商家庭，故居原是一座占地一千四百平方米的中式宅院，现存复原建筑由粮店街迁建而来。纪念馆分为"津门世家""一代宗师""南山律宗"等展区，陈列他的手稿、印章与书法。',
-      '他是中国第一个画人体模特的美术教师、第一个用五线谱作曲的音乐家，《送别》传唱百年；三十九岁在杭州虎跑寺出家，法号弘一，成为近代律宗高僧。临终写下"悲欣交集"四字。纪念馆里那幅字与一把旧琴，把风流才子与苦行僧的两段人生放在同一间屋子里。'
+      '李叔同出生于天津盐商家庭，父亲李翘曾任山东诸城县知县，家族在盐业界颇有影响。他早年留学日本，学习绘画与音乐，是中国第一个画人体模特的美术教师、第一个用五线谱作曲的音乐家，《送别》传唱百年。三十九岁在杭州虎跑寺出家，法号弘一，成为近代律宗高僧。临终写下"悲欣交集"四字。纪念馆里那幅字与一把旧琴，把风流才子与苦行僧的两段人生放在同一间屋子里。',
+      '出家后李叔同戒除荤腥，终身素食，笔耕不辍，书法集王羲之、颜真卿、欧阳询之所长，形成独特「弘一体」。他不娶不生，以弘扬律宗、书法教育为终身志业，1942年在泉州寂世，终年63岁。'
     ],
-    hl: ['《送别》的作者', '从才子到弘一法师', '悲欣交集绝笔']
+    hl: ['《送别》的作者', '从才子到弘一法师', '悲欣交集绝笔'],
+    works: [
+      { src: 'images/photos/tj-lishutong-work1.jpg', cap: '李叔同书法《朱书金刚经》', type: 'calligraphy' },
+      { src: 'images/photos/tj-lishutong-work2.jpg', cap: '李叔同楷书《金刚经》', type: 'calligraphy' }
+    ]
   },
   {
     id: 'tj-zhouenlai', prov: 'tianjin', cat: 'memorial',
@@ -3376,10 +3445,14 @@ const SITES = [
     city: '潍坊 · 潍城', address: '山东省潍坊市潍城区十笏园文化街区',
     lat: 36.7145436, lng: 119.098464,
     desc: [
-      '郑板桥名燮，江苏兴化人，乾隆十一年（1746）任潍县知县，在此七年。他开仓赈灾、修城浚河，深得民心；又善画兰竹石，书法自创"六分半书"，是"扬州八怪"中最具民间声望的一位。',
-      '"衙斋卧听萧萧竹，疑是民间疾苦声"就写于潍县任上。纪念馆陈列他的书画、印章与《潍县竹枝词》，并复原县衙场景。他因赈灾得罪豪绅被罢官，离潍时百姓夹道相送，"乌纱掷去不为官，囊橐萧萧两袖寒"是他自己的总结。'
+      '郑板桥名燮，江苏兴化人，乾隆十一年（1746）任潍县知县，在此七年。他开仓赈灾、修城浚河，深得民心；又善画兰竹石，书法自创"六分半书"，是"扬州八怪"中最具民间声望的一位。郑板桥年轻丧父，由母亲抚养成人，孝敬母亲，母亲去世后终身不娶，终生以孝行著称。',
+      '"衙斋卧听萧萧竹，疑是民间疾苦声"就写于潍县任上。纪念馆陈列他的书画、印章与《潍县竹枝词》，并复原县衙场景。他因赈灾得罪豪绅被罢官，离潍时百姓夹道相送，"乌纱掷去不为官，囊橐萧萧两袖寒"是他自己的总结。晚年寓居扬州，以卖画为生，与金农、李鱓等交往密切。'
     ],
-    hl: ['"衙斋卧听萧萧竹"', '"六分半书"与兰竹', '潍县七年赈灾']
+    hl: ['"衙斋卧听萧萧竹"', '"六分半书"与兰竹', '潍县七年赈灾'],
+    works: [
+      { src: 'images/photos/sd-zhengbanqiao-work1.jpg', cap: '郑燮《竹石图》', type: 'painting' },
+      { src: 'images/photos/sd-zhengbanqiao-work2.jpg', cap: '郑燮《竹石》', type: 'painting' }
+    ]
   },
   {
     id: 'sd-yangjiabu', prov: 'shandong', cat: 'culture',
@@ -8444,10 +8517,14 @@ const SITES = [
     city: '安徽 · 合肥', address: '合肥市包河区',
     lat: 31.8100, lng: 117.2800,
     desc: [
-      '刘海粟美术馆位于合肥市包河区，是为纪念现代艺术大师刘海粟而建。刘海粟字季子，江苏常州人，长期在合肥生活与创作。他是现代艺术的先驱，创办了上海美专，对中国现代美术教育产生了深远影响。',
-      '美术馆收藏了刘海粟的大量作品，展示了他的艺术成就与风格。刘海粟是现代艺术大师，美术馆是欣赏现代艺术、了解刘海粟艺术成就的重要场所。'
+      '刘海粟美术馆位于合肥市包河区，是为纪念现代艺术大师刘海粟而建。刘海粟字季子，江苏常州人，长期在合肥生活与创作。他是现代艺术的先驱，创办了上海美专，对中国现代美术教育产生了深远影响。刘海粟与妻子庞礴情深，二人同岁结婚，庞礴全力支持他的艺术创作，被誉为"美术馆之母"。',
+      '刘海粟一生不事权贵，以画教学为生，创办中国美术学会、上海美专，培养了大批现代美术人才。他擅长花鸟画、人物画，笔触清新灵动，作品充满生活气息。1994年在合肥去世，享年98岁。'
     ],
-    hl: ['现代艺术先驱', '上海美专创办人', '刘海粟作品收藏']
+    hl: ['现代艺术先驱', '上海美专创办人', '刘海粟作品收藏'],
+    works: [
+      { src: 'images/photos/ah-liuhaisu-work1.jpg', cap: '刘海粟《花鸟画》', type: 'painting' },
+      { src: 'images/photos/ah-liuhaisu-work2.jpg', cap: '刘海粟《人物画》', type: 'painting' }
+    ]
   },
   {
     id: 'ah-huizhou2', prov: 'anhui', cat: 'culture',
@@ -13357,24 +13434,55 @@ function detailShots(s) {
   };
 }
 
-/* ---------- 名人作品扩展：画家展画作、书法家展书法、诗人/散文家展诗文 ---------- */
-function renderExtra(s) {
+/* ---------- 名人介绍：可折叠显示 ---------- */
+function renderDesc(s) {
+  var full = (s.desc || []).join('\n');
+  var collapsed = full.length > 200 ? full.slice(0, 200) + '…' : full;
+  if (full.length <= 200) {
+    return '<div class="desc-wrap"><div class="desc-collapsed desc-expanded">' + full.split('\n').map(function(p){return '<p>'+p+'</p>';}).join('') + '</div></div>';
+  }
+  return '<div class="desc-wrap">'
+    + '<div class="desc-collapsed">' + collapsed.split('\n').map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>'
+    + '<div class="desc-expanded" style="display:none">' + full.split('\n').map(function(p){return '<p>'+p+'</p>';}).join('') + '</div>'
+    + '<span class="btn-desc-more" id="btnDescMore" onclick="toggleDesc(this)">显示更多</span>'
+    + '</div>';
+}
+
+/* 切换介绍展开/收起 */
+function toggleDesc(btn) {
+  var wrap = btn.closest('.desc-wrap');
+  var collapsed = wrap.querySelector('.desc-collapsed');
+  var expanded = wrap.querySelector('.desc-expanded');
+  if (!collapsed || !expanded) return;
+  if (collapsed.style.display !== 'none') {
+    collapsed.style.display = 'none';
+    expanded.style.display = 'block';
+    btn.textContent = '收起';
+  } else {
+    collapsed.style.display = 'block';
+    expanded.style.display = 'none';
+    btn.textContent = '显示更多';
+  }
+}
+
+/* ---------- 名人作品专区（与地点实景分离） ---------- */
+function renderExtraSection(s) {
   var out = '';
   /* 画家/书法家：展示作品图片（works 数组） */
   if (s.works && s.works.length) {
     var isPaint = /画家|绘画|国画|油画|泼墨/.test(s.role || '');
-    out += '<div class="extra"><div class="sec">' + (isPaint ? '代 表 作 画' : '代 表 书 法') + '</div>';
+    out += '<div class="extra-section"><div class="sec">' + (isPaint ? '代 表 作 画' : '代 表 书 法') + '</div>';
     out += '<div class="works">';
     s.works.forEach(function (w) {
-      out += '<div class="work" ondblclick="toggleImgFull(this.firstElementChild)" title="双击放大/缩小">';
-      out += '<img src="' + (w.src || '') + '" alt="' + (w.cap || s.name) + '" loading="lazy" ondblclick="toggleImgFull(this)" title="双击放大/缩小" onerror="this.closest(\'.work\').style.display=\'none\'">';
+      out += '<div class="work" ondblclick="toggleImgFull(this.firstElementChild)" title="双击在地图中央放大">';
+      out += '<img src="' + (w.src || '') + '" alt="' + (w.cap || s.name) + '" loading="lazy" ondblclick="toggleImgFull(this)" title="双击在地图中央放大" onerror="this.parentElement.style.display=\"none"">';
       out += '<div class="wcap">' + (w.cap || s.name) + '</div></div>';
     });
     out += '</div></div>';
   }
   /* 诗人/散文家：展示诗文、古文白话对照与解析（writings 数组） */
   if (s.writings && s.writings.length) {
-    out += '<div class="extra"><div class="sec">代 表 诗 文</div><div class="writings">';
+    out += '<div class="extra-section"><div class="sec">代 表 诗 文</div><div class="writings">';
     s.writings.forEach(function (w) {
       out += '<div class="writing">';
       out += '<div class="wtitle"><span>' + (w.title || '') + '</span><span class="wtype">' + (w.type || '诗文') + '</span></div>';
@@ -13400,8 +13508,8 @@ function renderDetail(id) {
     + '<div class="slides" id="slides" onscroll="onSlidesScroll()">'
     + shots.map(function (p, i) {
       return '<div class="slide"><img src="' + p.src + '" alt="' + s.name + '" loading="' + (i ? 'lazy' : 'eager') + '"'
-        + ' ondblclick="toggleImgFull(this)" title="双击放大/缩小"'
-        + ' onerror="this.closest(\'.slide\').style.display=\'none\'">'
+        + ' ondblclick="toggleImgFull(this)" title="双击在地图中央放大"'
+        + ' onerror="this.parentElement.style.display=\"none"">'
         + '<div class="cap"><span>' + (p.cap || s.name) + '</span>'
         + '<span class="crd">' + (p.credit || '') + '</span></div></div>';
     }).join('')
@@ -13421,10 +13529,10 @@ function renderDetail(id) {
     + '<div class="tags"><span class="tag ' + s.cat + '">' + cat.label + '</span><span class="tag plain">' + s.city + '</span></div>'
     + '<h2>' + s.name + '</h2>'
     + '<div class="person"><b>' + s.person + '</b> · ' + s.role + '</div>'
-    + s.desc.map(function (p) { return '<p>' + p + '</p>'; }).join('')
+    + renderDesc(s)
     + '<div class="sec">观 光 看 点</div>'
     + '<ul class="hl">' + s.hl.map(function (h) { return '<li>' + h + '</li>'; }).join('') + '</ul>'
-    + renderExtra(s)
+    + renderExtraSection(s)
     + '<div class="addr"><b>地址</b><br>' + s.address + '</div>'
     + '</div>';
   const d = document.getElementById('detail');
@@ -13528,23 +13636,34 @@ function closeDetail() {
   rebuildMarkers();
   rebuildLabels();
   renderList();
-  /* 关闭详情时重置所有放大图片 */
-  document.querySelectorAll('.slide img.img-full').forEach(function (img) {
-    img.classList.remove('img-full');
-  });
+  closeImgModal();
 }
 
-/* 图片双击放大/缩小（全屏显示，再双击退回） */
+/* 图片双击：在地图中央弹出大图覆盖层，再双击或点关闭按钮退回 */
 function toggleImgFull(img) {
-  if (img.classList.contains('img-full')) {
-    img.classList.remove('img-full');
+  var modal = document.getElementById('imgModal');
+  var modalImg = document.getElementById('modalImg');
+  var modalCap = document.getElementById('modalCap');
+  if (!modal || !modalImg) return;
+  if (modal.classList.contains('open')) {
+    modal.classList.remove('open');
   } else {
-    /* 先关闭其他放大图片 */
-    document.querySelectorAll('.slide img.img-full').forEach(function (x) {
-      x.classList.remove('img-full');
-    });
-    img.classList.add('img-full');
+    modalImg.src = img.src;
+    modalImg.alt = img.alt || '';
+    modalCap.textContent = img.alt || '';
+    modal.classList.add('open');
   }
+}
+
+/* 关闭地图中央大图覆盖层 */
+function closeImgModal() {
+  var modal = document.getElementById('imgModal');
+  if (modal) modal.classList.remove('open');
+}
+
+/* 双击大图本身也退回 */
+function toggleImgModal() {
+  closeImgModal();
 }
 
 function setFilter(k) {
@@ -13584,9 +13703,9 @@ function onZoomChange() {
 try { map.on('zoom', onZoomChange); } catch (e) {}
 try { map.on('zoomend', onZoomChange); } catch (e) {}
 
-/* Esc 关闭详情 */
+/* Esc 关闭详情和大图 */
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') closeDetail();
+  if (e.key === 'Escape') { closeDetail(); closeImgModal(); }
 });
 
 /* 初始化 */
