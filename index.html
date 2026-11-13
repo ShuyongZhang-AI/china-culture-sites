@@ -1224,7 +1224,7 @@ const SITES = [
     lat: 30.7470, lng: 120.4870, img: 'images/maodun.jpg',
     desc: [
       '茅盾，原名沈德鸿，字雁冰，乌镇人，中国现代文学巨匠、新文化运动先驱，曾任文化部部长、中国作家协会主席。他的《子夜》《春蚕》《林家铺子》等名作都以江南水乡与上海都会为背景，细腻描绘了故乡乌镇的人情风物。',
-      '茅盾故居是他在乌镇出生和晚年生活过的宅院，四开间两进深的木结构民居临河而建，书房陈设如旧。他临终前将25万元稿费捐出设立长篇小说文艺奖，后发展为中国长篇小说最高奖「茅盾文学奖」。漫步乌镇东栅老街，林家铺子、汇源当铺等文学场景历历在目。'
+      '茅盾故居是他在乌镇出生和少年时生活过的宅院，四开间两进深的木结构民居临河而建，书房陈设如旧。他临终前将25万元稿费捐出设立长篇小说文艺奖，后发展为中国长篇小说最高奖「茅盾文学奖」。漫步乌镇东栅老街，林家铺子、汇源当铺等文学场景历历在目。'
     ],
     hl: ['文学巨匠出生地', '「茅盾文学奖」之源', '《林家铺子》水乡现场']
   },
@@ -1262,15 +1262,12 @@ const SITES = [
     city: '浙江 · 嘉善', address: '嘉兴嘉善县魏塘街道花园路178号',
     lat: 30.8310, lng: 120.9310, img: 'images/meihuaan.jpg',
     desc: [
-      '吴镇，字仲圭，号梅花道人，嘉善魏塘人，「元四家」之一。他一生清贫，隐居卖卜为生，笔墨沉郁湿润，独爱画《渔父图》，「洞庭湖上晚风生」的渔隐之趣是其精神写照。吴镇终身未娶，没有子女，以画卖卜维持生计，与盛懋、朱淇等元代文人交往甚密，与盛懋为邻而门前冷落，他自信「二十年后不复尔」，终成画史佳话，被元代文人誉为「画圣」。',
+      '吴镇，字仲圭，号梅花道人，嘉善魏塘人，「元四家」之一。他一生清贫，隐居卖卜为生，笔墨沉郁湿润，独爱画《渔父图》，「洞庭湖上晚风生」的渔隐之趣是其精神写照。他有妻子和儿子佛奴，曾绘《墨竹谱》传给儿子。相传他与画家盛懋比邻而居，求盛画的人带着金帛络绎不绝，吴家门前却冷清；妻子笑他不如邻居挣钱，他答道「二十年后不复尔」。这则故事见于董其昌《容台集》，流传后也有不同说法。',
       '吴镇生前自题「梅花和尚之墓」，梅花庵即其墓祠所在，历六百余年保存至今，是中国书画史上罕见的画家自选墓地，亦为历代文人凭吊的书画圣地。1354年在嘉善去世，享年75岁。其笔下渔翁孤舟、江阔天高，成为元代山水画的重要范式，对后世明清山水画影响深远。'
     ],
     hl: ['「元四家」唯一自选址墓', '六百年梅花庵', '《渔父图》与渔隐精神'],
     works: [
-      { src: 'images/photos/meihuaan-work1.jpg', cap: '吴镇《渔父图》', type: 'painting' },
-      { src: 'images/photos/meihuaan-work2.jpg', cap: '吴镇《渔隐图》', type: 'painting' },
-      { src: 'images/photos/meihuaan-work3.jpg', cap: '吴镇《竹溪渔隐图》', type: 'painting' },
-      { src: 'images/photos/meihuaan-work4.jpg', cap: '吴镇《松溪渔隐图》', type: 'painting' }
+      { src: 'images/photos/meihuaan-work1.jpg', cap: '吴镇《洞庭渔隐图》 · 藏于台北故宫博物院', source: 'https://www.xiwangchina.com/xwxq/2822.html', type: 'painting' }
     ]
   },
   {
@@ -10719,41 +10716,38 @@ const SITES = [
     person: '鲁迅（1881—1936）',
     role: '现代文学家 / 思想家',
     city: '浙江 · 绍兴', address: '浙江省绍兴市越城区鲁迅故居',
-    lat: 29.97, lng: 120.05,
+    lat: 30.0030, lng: 120.5940, photoKey: 'luxun-guli',
     desc: [
-      '鲁迅故居位于浙江省绍兴市越城区，是现代文学家鲁迅的出生地。鲁迅字豫才，号豫山、才夫，是中国现代文学奠基人。故居保存了鲁迅少年时期的生活场所和绍兴文化遗存。',
-      '鲁迅是中国现代文学的奠基人，其作品影响深远。鲁迅故居是了解现代文学和绍兴文化的重要场所。'
+      '绍兴鲁迅故里包括鲁迅故居、百草园和三味书屋等处，是鲁迅少年时生活和读书的地方。鲁迅原名周树人，字豫才；祖父入狱、父亲患病后家道中落，他在当铺和药店间奔走的经历，后来也写入了散文。',
+      '1906年鲁迅与朱安成婚，婚事由家中安排；朱安长期留在北京照顾鲁迅的母亲。鲁迅后来与许广平共同生活，育有一子周海婴。他与弟弟周作人都曾投身新文化运动，后来兄弟失和。1936年鲁迅在上海病逝，送葬者为灵柩覆盖「民族魂」旗帜；他的墓如今位于上海鲁迅公园。'
     ],
-    hl: ['鲁迅故居', '现代文学', '绍兴文化']
+    hl: ['现代文学奠基人', '朱安与许广平', '《呐喊》《野草》']
   },
   {
     id: 'zj-maodun', prov: 'zhejiang', cat: 'culture',
     name: '茅盾故居 · 桐乡文化',
     person: '茅盾（1896—1981）',
     role: '现代文学家 / 《子夜》作者',
-    city: '浙江 · 桐乡', address: '浙江省桐乡市茅盾故居',
-    lat: 30.78, lng: 120.55,
+    city: '浙江 · 桐乡', address: '浙江省桐乡市乌镇观前街茅盾故居',
+    lat: 30.7407, lng: 120.4896, photoKey: 'maodun',
     desc: [
-      '茅盾故居位于浙江省桐乡市，是现代文学家茅盾的出生地。茅盾原名沈雁冰，字德鸣，著《子夜》、《蚀》等作品，是中国现代重要的文学家。故居保存了茅盾生平事迹和江南水乡风貌。',
-      '茅盾是中国现代重要的文学家，其小说作品反映了中国社会变迁。茅盾故居是了解现代文学和江南文化的重要场所。'
+      '茅盾故居位于桐乡乌镇观前街，是作家茅盾出生并度过少年时光的地方。茅盾原名沈德鸿，字雁冰，十岁丧父，母亲陈爱珠教他文学、地理和历史；他后来称母亲是自己的第一位启蒙老师。他与孔德沚结婚，育有儿女。',
+      '茅盾与郑振铎、叶圣陶等人参与发起文学研究会，创作了《子夜》《春蚕》等作品。1980年他向乌镇中学赠书，还为家乡题字。1981年他在北京病逝，临终前捐出稿费支持长篇小说创作，后来设立的茅盾文学奖延续了这一心愿。'
     ],
-    hl: ['茅盾故居', '《子夜》', '现代文学']
+    hl: ['《子夜》《蚀》', '文学研究会', '茅盾文学奖']
   },
   {
     id: 'zj-xuzhimo', prov: 'zhejiang', cat: 'culture',
     name: '徐志摩故居 · 嘉兴文化',
     person: '徐志摩（1897—1931）',
     role: '现代诗人 / “新月派”代表',
-    city: '浙江 · 嘉兴', address: '浙江省嘉兴市南湖区徐志摩故居',
-    lat: 30.75, lng: 120.75,
+    city: '浙江 · 海宁', address: '嘉兴海宁市硖石街道干河街38号',
+    lat: 30.5270, lng: 120.6850,
     desc: [
-      '徐志摩故居位于浙江省嘉兴市南湖区，是现代诗人徐志摩的出生地。徐志摩字章钊，号陆小曼，是“新月派”代表诗人，著《再别康桥》等作品。故居保存了徐志摩生平事迹和南湖文化遗存。',
-      '徐志摩是中国现代著名的诗人，其诗歌风格优美。徐志摩故居是了解现代文学和南湖文化的重要场所。'
+      '徐志摩，谱名章垿，浙江海宁人，是新月派诗人。早年他与张幼仪结婚，后来离婚；两人育有儿子徐积锴和徐德生，幼子早夭。1926年他与陆小曼结婚，曾在海宁干河街的新居短暂生活；这座中西合璧的小楼如今作为故居开放。',
+      '徐志摩与闻一多等新月派文人交往，诗作《再别康桥》寄托了对剑桥岁月的眷恋。1931年他乘飞机北上，在济南附近遇空难去世，年仅34岁。其墓后来在海宁西山公园重建，墓前可凭吊诗人。'
     ],
-    hl: ['徐志摩故居', '《再别康桥》', '新月派'],
-    writings: [
-      { title: '《再别康桥》', type: '现代诗', classical: '那一年，我柔软的青葱，\n轻轻地摇摆，\n在康桥的波光里，\n我告别了剑桥。\n\n那一年，我柔软的青葱，\n轻轻地摇摆，\n在康河的波光里，\n我的影子，\n被溅起的波纹，\n划得碎成万千。', vernacular: '那一年，我年轻柔软的青春，\n轻轻地摇摆，\n在康桥的波光里，\n我告别了剑桥。\n\n那一年，我年轻柔软的青春，\n轻轻地摇摆，\n在康河的波光里，\n我的影子，\n被溅起的波纹，\n划碎成万千。', analysis: '徐志摩代表作，以柔美婉转的笔触写别离之情，"柔软的青葱"与"波纹"的意象，营造出淡雅忧伤的氛围，表达了诗人对剑桥岁月的眷恋和对告别的不舍。' }
-    ]
+    hl: ['徐志摩故居', '《再别康桥》', '新月派']
   },
   {
     id: 'sh-bajin', prov: 'shanghai', cat: 'culture',
@@ -13453,7 +13447,8 @@ function illusSrc(s) {
 }
 
 function detailShots(s) {
-  const list = (typeof PHOTOS !== 'undefined' && PHOTOS[s.id]) ? PHOTOS[s.id] : null;
+  const photoKey = s.photoKey || s.id;
+  const list = (typeof PHOTOS !== 'undefined' && PHOTOS[photoKey]) ? PHOTOS[photoKey] : null;
   if (list && list.length) return { shots: list, illus: false };
   const isIllus = !!s.img;
   return {
@@ -13502,9 +13497,9 @@ function renderExtraSection(s) {
     out += '<div class="extra-section"><div class="sec">' + (isPaint ? '代 表 作 画' : '代 表 书 法') + '</div>';
     out += '<div class="works">';
     s.works.forEach(function (w) {
-      out += '<div class="work" ondblclick="toggleImgFull(this.firstElementChild)" title="双击在地图中央放大">';
-      out += '<img src="' + (w.src || '') + '" alt="' + (w.cap || s.name) + '" loading="lazy" ondblclick="toggleImgFull(this)" title="双击在地图中央放大" onerror="this.parentElement.style.display=\"none"">';
-      out += '<div class="wcap">' + (w.cap || s.name) + '</div></div>';
+      out += '<div class="work">';
+      out += '<img src="' + (w.src || '') + '" alt="' + (w.cap || s.name) + '" loading="lazy" ondblclick="toggleImgFull(this)" title="双击在地图中央放大" onerror="this.parentElement.style.display=&quot;none&quot;">';
+      out += '<div class="wcap">' + (w.cap || s.name) + (w.source ? ' · <a href="' + w.source + '" target="_blank" rel="noopener noreferrer">图片来源</a>' : '') + '</div></div>';
     });
     out += '</div></div>';
   }
@@ -13537,7 +13532,7 @@ function renderDetail(id) {
     + shots.map(function (p, i) {
       return '<div class="slide"><img src="' + p.src + '" alt="' + s.name + '" loading="' + (i ? 'lazy' : 'eager') + '"'
         + ' ondblclick="toggleImgFull(this)" title="双击在地图中央放大"'
-        + ' onerror="this.parentElement.style.display=\"none"">'
+        + ' onerror="this.parentElement.style.display=&quot;none&quot;">'
         + '<div class="cap"><span>' + (p.cap || s.name) + '</span>'
         + '<span class="crd">' + (p.credit || '') + '</span></div></div>';
     }).join('')
