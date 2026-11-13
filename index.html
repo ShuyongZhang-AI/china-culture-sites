@@ -236,7 +236,7 @@
   .extra-section .writing .wtitle { font-size: 14px; color: #2b2620; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: baseline; }
   .extra-section .writing .wtype { font-size: 10px; color: #a93526; letter-spacing: 1px; padding: 1px 6px; border-radius: 8px; background: #f2ecdd; }
   .extra-section .writing .classical { font-size: 13.5px; color: #454036; line-height: 1.8; margin: 4px 0 4px; text-align: justify; font-family: "Noto Serif SC", "Source Han Serif SC", serif; white-space: pre-wrap; }
-  .extra-section .writing .vernacular { font-size: 12.5px; color: #6b5f49; line-height: 1.7; margin: 4px 0 8px; border-left: 3px solid #b39b6a; padding-left: 10px; text-align: justify; font-style: italic; }
+  .extra-section .writing .vernacular { white-space: pre-wrap; font-size: 12.5px; color: #6b5f49; line-height: 1.7; margin: 4px 0 8px; border-left: 3px solid #b39b6a; padding-left: 10px; text-align: justify; font-style: italic; }
   .extra-section .writing .analysis { font-size: 11.5px; color: #8a7f68; line-height: 1.6; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #d6c9b3; }
 
   /* ---------- 名人介绍可折叠 ---------- */
@@ -1334,6 +1334,32 @@ const SITES = [
   },
 
   /* ================= 增补：江苏 ================= */
+  {
+    id: 'zhangpu-residence', prov: 'jiangsu', cat: 'memorial',
+    name: '张溥故居 · 七录斋',
+    person: '张溥（1602—1641）',
+    role: '明末文学家 · 复社领袖',
+    city: '江苏 · 太仓', address: '江苏省太仓市城厢镇新华西路57号',
+    lat: 31.44639, lng: 121.09667,
+    desc: [
+      '张溥，字天如，号西铭，太仓人，明末文学家和复社领袖。他少时读书，常手抄、诵读后焚去，反复六七遍，书斋因而称「七录斋」。他与张采等以文会友，组织复社，议论时政，也编选古代文章。',
+      '故居始建于明代天启年间，现存三进院落与通转走马楼，为全国重点文物保护单位。张溥所写《五人墓碑记》纪念苏州五位义士；五人墓位于苏州山塘街，不是张溥本人之墓。有关张溥墓的现存位置尚待核实，暂不另设墓地图钉。'
+    ],
+    hl: ['七录斋与复社', '《五人墓碑记》作者', '明代走马楼']
+  },
+  {
+    id: 'wurenmu', prov: 'jiangsu', cat: 'tomb',
+    name: '五人墓 · 义风园',
+    person: '颜佩韦、杨念如、马杰、沈扬、周文元',
+    role: '明末苏州五义士 · 张溥《五人墓碑记》',
+    city: '江苏 · 苏州', address: '江苏省苏州市姑苏区山塘街775号',
+    lat: 31.33114, lng: 120.58081,
+    desc: [
+      '五人墓位于苏州山塘街，是颜佩韦、杨念如、马杰、沈扬、周文元五位义士的合葬墓。明末周顺昌被逮时，苏州市民奋起抗争，五人后来被处死；魏忠贤倒台后，乡人于其废祠旧址安葬五人。',
+      '太仓文学家张溥为五人撰写《五人墓碑记》，赞颂平民在危难中的勇气。此墓安葬的是五位义士，不是作者张溥的墓。墓前有「义风千古」石坊，堂内有碑刻。'
+    ],
+    hl: ['苏州五义士合葬地', '张溥《五人墓碑记》', '山塘街与义风千古石坊']
+  },
   {
     id: 'guiyouguang', prov: 'jiangsu', cat: 'tomb',
     name: '归有光墓 · 震川园',
@@ -3703,7 +3729,7 @@ const SITES = [
     hl: ['李白寓居任城二十余年', '明代重檐楼阁', '《清平调》石刻'],
     writings: [
       { title: '《静夜思》', type: '五言绝句', classical: '床前明月光，\n疑是地上霜。\n举头望明月，\n低头思故乡。', vernacular: '床前明亮的月光，\n怀疑是地上的霜。\n我抬头望向明月，\n又低头思念故乡。', analysis: '李白早期作品，四句二十字，以极简笔触写出游子对故乡的深深思念，"举""低"两个动作，由远及近，层层递进，情感真挚自然。' },
-      { title: '《将进酒》·节选', type: '古风', classical: '君不见，\n黄河之水天上来，\n奔流到海不复回。\n君不见，\n高堂明镜悲白发，\n朝如青丝暮成雪。', vernacular: '你没有看到吗，\n黄河的水从天上奔流而来，\n一入大海就再也回不来了。\n你没有看到吗，\n高堂明镜为悲伤白发而悲叹，\n早晨如青丝，晚上就变成了白雪。', analysis: '李白代表作，豪放奔放，劝人趁年轻多饮酒，不要让金樽空对月，表达了诗人不羁的性格和对人生的感慨。' }
+      { title: '《将进酒》·节选', type: '古风', classical: '君不见，\n黄河之水天上来，\n奔流到海不复回。\n君不见，\n高堂明镜悲白发，\n朝如青丝暮成雪。', vernacular: '你没有看到吗，\n黄河的水从天上奔流而来，\n一入大海就再也回不来了。\n你没有看到吗，\n对着高堂的明镜悲叹头上生出白发，\n早晨如青丝，晚上就变成了白雪。', analysis: '李白代表作，豪放奔放，劝人趁年轻多饮酒，不要让金樽空对月，表达了诗人不羁的性格和对人生的感慨。' }
     ]
   },
   {
@@ -8980,7 +9006,7 @@ const SITES = [
     ],
     hl: ['诗圣杜甫', '《春望》《登高》', '忧国忧民'],
     writings: [
-      { title: '《春望》', type: '七言律诗', classical: '国破山河在，\n城春草木深。\n感时花溅泪，\n恨别鸟惊心。\n烽火连三月，\n家书抵万金。\n白头搔更短，\n测不欲笔簪。', vernacular: '国家虽然破碎，山河依然存在；\n城市里的春天，草木愈发浓密。\n触景生情花溅泪，\n离别之恨鸟儿也惊心。\n烽火连续三月不断，\n一封家书抵得上万两黄金。\n白发越挠越短，\n测不愿再插花簪。', analysis: '杜甫安史之乱时期所作，"国破山河在，城春草木深"以对比手法写出国破家亡的悲凉，"感时花溅泪，恨别鸟惊心"人鸟同悲，情感深沉，被誉为"史诗之巅"。' }
+      { title: '《春望》', type: '五言律诗', classical: '国破山河在，\n城春草木深。\n感时花溅泪，\n恨别鸟惊心。\n烽火连三月，\n家书抵万金。\n白头搔更短，\n浑欲不胜簪。', vernacular: '国家虽然破碎，山河依然存在；\n城市里的春天，草木愈发浓密。\n触景生情花溅泪，\n离别之恨鸟儿也惊心。\n烽火连续三月不断，\n一封家书抵得上万两黄金。\n白发越挠越短，\n简直连簪子都插不住了。', analysis: '杜甫安史之乱时期所作，"国破山河在，城春草木深"以对比手法写出国破家亡的悲凉，"感时花溅泪，恨别鸟惊心"人鸟同悲，情感深沉，被誉为"史诗之巅"。' }
     ]
   },
   {
@@ -10631,7 +10657,7 @@ const SITES = [
     ],
     hl: ['欧阳修故居', '八大散文家', '庐陵文化'],
     writings: [
-      { title: '《醉翁亭记》·节选', type: '散文（古文）', classical: '环滁皆山也。其西南诸峰，林林竹菉皆然，独天目山一点，如藉在天际，向北麦荣，彘鸡杼槠，犬彘畎亩，蜿蜒几二十里，皆在杯中。', vernacular: '滁州周围全是山。西南面的各个山峰，树林和竹子都长得茂密，只有天目山那个山尖，像铺在天边一样，朝向北面麦荣村，有鸡猪犬猪等畜禽和庄稼，绵延几十里，都在酒杯里面。', analysis: '欧阳修名篇，以"醉翁之意不在酒，在乎山水之间"著名，写作者与民同乐的情怀，寓意超脱，被誉为唐宋八大家散文之冠。' }
+      { title: '《醉翁亭记》·节选', type: '散文', classical: '环滁皆山也。其西南诸峰，林壑尤美，望之蔚然而深秀者，琅琊也。山行六七里，渐闻水声潺潺，而泻出于两峰之间者，酿泉也。', vernacular: '滁州四周都是山。西南方的山峰，树林与山谷尤其秀美；远望草木茂盛、幽深秀丽的，是琅琊山。沿山路走六七里，渐渐听到潺潺水声，从两峰之间流泻出来的，是酿泉。', analysis: '文章由远及近引出滁州山水，借游乐描写抒发与民同乐之意。' }
     ]
   },
   {
@@ -11067,9 +11093,246 @@ const REGIONS = {
   all:         { label: '全国',     provs: PROV_ORDER.slice(), b: [[21.10, 73.40], [53.40, 131.00]], cn: [[18.00, 73.40], [53.80, 135.00]] }
 };
 
+
+/* 经核对的作品补充：同一人物的不同纪念地点可各自展示。 */
+const SUPPLEMENTAL_WRITINGS = {
+  "zhangpu-residence": [
+    {
+      "title": "《五人墓碑记》",
+      "type": "古文",
+      "classical": "五人者，盖当蓼洲周公之被逮，激于义而死焉者也。至于今，郡之贤士大夫请于当道，即除魏阉废祠之址以葬之，且立石于其墓之门，以旌其所为。呜呼，亦盛矣哉！\n\n夫五人之死，去今之墓而葬焉，其为时止十有一月耳。夫十有一月之中，凡富贵之子，慷慨得志之徒，其疾病而死，死而湮没不足道者，亦已众矣，况草野之无闻者欤？独五人之皦皦，何也？\n\n予犹记周公之被逮，在丁卯三月之望。吾社之行为士先者，为之声义，敛资财以送其行，哭声震动天地。缇骑按剑而前，问：“谁为哀者？”众不能堪，抶而仆之。是时以大中丞抚吴者，为魏之私人，周公之逮所由使也。吴之民方痛心焉，于是乘其厉声以呵，则噪而相逐，中丞匿于溷藩以免。既而以吴民之乱请于朝，按诛五人，曰：颜佩韦、杨念如、马杰、沈扬、周文元，即今之傫然在墓者也。\n\n然五人之当刑也，意气扬扬，呼中丞之名而詈之，谈笑以死。断头置城上，颜色不少变。有贤士大夫发五十金，买五人之脰而函之，卒与尸合。故今之墓中，全乎为五人也。\n\n嗟夫！大阉之乱，缙绅而能不易其志者，四海之大，有几人欤？而五人生于编伍之间，素不闻诗书之训，激昂大义，蹈死不顾，亦曷故哉？且矫诏纷出，钩党之捕遍于天下，卒以吾郡之发愤一击，不敢复有株治。大阉亦逡巡畏义，非常之谋，难于猝发。待圣人之出而投缳道路，不可谓非五人之力也！\n\n由是观之，则今之高爵显位，一旦抵罪，或脱身以逃，不能容于远近，而又有剪发杜门，佯狂不知所之者。其辱人贱行，视五人之死，轻重固何如哉？是以蓼洲周公，忠义暴于朝廷，赠谥美显，荣于身后；而五人亦得以加其土封，列其姓名于大堤之上。凡四方之士，无有不过而拜且泣者，斯固百世之遇也！不然，令五人者保其首领，以老于户牖之下，则尽其天年，人皆得以隶使之，安能屈豪杰之流，扼腕墓道，发其志士之悲哉？故予与同社诸君子，哀斯墓之徒有其石也，而为之记，亦以明死生之大，匹夫之有重于社稷也。\n\n贤士大夫者：冏卿因之吴公，太史文起文公，孟长姚公也。",
+      "vernacular": "这五人是在周蓼洲先生被捕时，因义愤而牺牲的人。如今本郡贤士请求官府，清理魏忠贤废祠的旧址，将他们安葬，并在墓门前立碑表彰他们的事迹。啊，这真是隆重啊！\n\n五人遇难到现在修墓安葬，只隔了十一个月。这期间，富贵得志的人病死之后默默无闻的已很多，更何况乡间无名的百姓？为何偏偏这五人如此光耀呢？\n\n我记得周公被捕是在三月十五。同社品行出众的人替他伸张正义，筹钱送行，哭声震动天地。差役按剑上前，问谁在哭；众人忍无可忍，将他们打倒。当时巡抚吴地的大中丞是魏忠贤的党羽，周公被捕正是他指使的。吴地百姓正恨他，他厉声呵斥时，大家便喊叫着追赶；他躲进厕所旁才逃脱。后来他向朝廷告称吴民作乱，追究处死了颜佩韦、杨念如、马杰、沈扬、周文元五人，就是现在并葬墓中的人。\n\n五人临刑时神情昂扬，直呼巡抚姓名痛骂，谈笑着赴死。头颅被挂在城上，脸色没有改变。有贤士拿出五十两银子买下头颅，用匣子装好，最终与遗体合葬，因此墓中葬着完整的五人。\n\n唉，魏忠贤作乱时，天下做官的人有几个能不改变志节？五人出身平民，平日没有受过诗书教育，却能为大义激励，赴死不回头，这是为什么？当时假诏不断，追捕党人的行动遍及天下，最终因为本郡百姓奋起反抗，阉党不敢再肆意株连。魏忠贤也畏惧正义，阴谋难以突然发动；直到新君即位，他在被发配途中自缢。作者认为，这不能说没有五人的功劳。\n\n由此看来，那些高官一旦获罪，有的逃走却无处容身，有的削发闭门或装疯逃避。他们卑劣的行为和五人的死相比，孰轻孰重？因此周公的忠义得到朝廷表彰，身后获得褒赠；五人也得以筑墓立碑，四方人士经过时无不拜祭流泪，这是百世难得的际遇。假如他们保全性命在家老去，即使活到天年，也只是任人驱使，又怎能令豪杰在墓前扼腕悲叹？所以我与同社诸君感叹墓前徒有石碑，便写下此记，以说明生死的重大意义，以及平民对国家的重要性。\n\n文中的贤士大夫，是太仆卿吴因之、太史文文起和姚孟长。",
+      "analysis": "记叙苏州市民抗争及五义士遇难，强调普通人在国家中的分量。文中年份各版本有异；事件一般记作1626年，此处按所列版本保留「丁卯」。",
+      "source": "https://gwgz.5000yan.com/zhangpo/12012.html"
+    }
+  ],
+  "wurenmu": [
+    {
+      "title": "《五人墓碑记》",
+      "type": "古文",
+      "classical": "五人者，盖当蓼洲周公之被逮，激于义而死焉者也。至于今，郡之贤士大夫请于当道，即除魏阉废祠之址以葬之，且立石于其墓之门，以旌其所为。呜呼，亦盛矣哉！\n\n夫五人之死，去今之墓而葬焉，其为时止十有一月耳。夫十有一月之中，凡富贵之子，慷慨得志之徒，其疾病而死，死而湮没不足道者，亦已众矣，况草野之无闻者欤？独五人之皦皦，何也？\n\n予犹记周公之被逮，在丁卯三月之望。吾社之行为士先者，为之声义，敛资财以送其行，哭声震动天地。缇骑按剑而前，问：“谁为哀者？”众不能堪，抶而仆之。是时以大中丞抚吴者，为魏之私人，周公之逮所由使也。吴之民方痛心焉，于是乘其厉声以呵，则噪而相逐，中丞匿于溷藩以免。既而以吴民之乱请于朝，按诛五人，曰：颜佩韦、杨念如、马杰、沈扬、周文元，即今之傫然在墓者也。\n\n然五人之当刑也，意气扬扬，呼中丞之名而詈之，谈笑以死。断头置城上，颜色不少变。有贤士大夫发五十金，买五人之脰而函之，卒与尸合。故今之墓中，全乎为五人也。\n\n嗟夫！大阉之乱，缙绅而能不易其志者，四海之大，有几人欤？而五人生于编伍之间，素不闻诗书之训，激昂大义，蹈死不顾，亦曷故哉？且矫诏纷出，钩党之捕遍于天下，卒以吾郡之发愤一击，不敢复有株治。大阉亦逡巡畏义，非常之谋，难于猝发。待圣人之出而投缳道路，不可谓非五人之力也！\n\n由是观之，则今之高爵显位，一旦抵罪，或脱身以逃，不能容于远近，而又有剪发杜门，佯狂不知所之者。其辱人贱行，视五人之死，轻重固何如哉？是以蓼洲周公，忠义暴于朝廷，赠谥美显，荣于身后；而五人亦得以加其土封，列其姓名于大堤之上。凡四方之士，无有不过而拜且泣者，斯固百世之遇也！不然，令五人者保其首领，以老于户牖之下，则尽其天年，人皆得以隶使之，安能屈豪杰之流，扼腕墓道，发其志士之悲哉？故予与同社诸君子，哀斯墓之徒有其石也，而为之记，亦以明死生之大，匹夫之有重于社稷也。\n\n贤士大夫者：冏卿因之吴公，太史文起文公，孟长姚公也。",
+      "vernacular": "这五人是在周蓼洲先生被捕时，因义愤而牺牲的人。如今本郡贤士请求官府，清理魏忠贤废祠的旧址，将他们安葬，并在墓门前立碑表彰他们的事迹。啊，这真是隆重啊！\n\n五人遇难到现在修墓安葬，只隔了十一个月。这期间，富贵得志的人病死之后默默无闻的已很多，更何况乡间无名的百姓？为何偏偏这五人如此光耀呢？\n\n我记得周公被捕是在三月十五。同社品行出众的人替他伸张正义，筹钱送行，哭声震动天地。差役按剑上前，问谁在哭；众人忍无可忍，将他们打倒。当时巡抚吴地的大中丞是魏忠贤的党羽，周公被捕正是他指使的。吴地百姓正恨他，他厉声呵斥时，大家便喊叫着追赶；他躲进厕所旁才逃脱。后来他向朝廷告称吴民作乱，追究处死了颜佩韦、杨念如、马杰、沈扬、周文元五人，就是现在并葬墓中的人。\n\n五人临刑时神情昂扬，直呼巡抚姓名痛骂，谈笑着赴死。头颅被挂在城上，脸色没有改变。有贤士拿出五十两银子买下头颅，用匣子装好，最终与遗体合葬，因此墓中葬着完整的五人。\n\n唉，魏忠贤作乱时，天下做官的人有几个能不改变志节？五人出身平民，平日没有受过诗书教育，却能为大义激励，赴死不回头，这是为什么？当时假诏不断，追捕党人的行动遍及天下，最终因为本郡百姓奋起反抗，阉党不敢再肆意株连。魏忠贤也畏惧正义，阴谋难以突然发动；直到新君即位，他在被发配途中自缢。作者认为，这不能说没有五人的功劳。\n\n由此看来，那些高官一旦获罪，有的逃走却无处容身，有的削发闭门或装疯逃避。他们卑劣的行为和五人的死相比，孰轻孰重？因此周公的忠义得到朝廷表彰，身后获得褒赠；五人也得以筑墓立碑，四方人士经过时无不拜祭流泪，这是百世难得的际遇。假如他们保全性命在家老去，即使活到天年，也只是任人驱使，又怎能令豪杰在墓前扼腕悲叹？所以我与同社诸君感叹墓前徒有石碑，便写下此记，以说明生死的重大意义，以及平民对国家的重要性。\n\n文中的贤士大夫，是太仆卿吴因之、太史文文起和姚孟长。",
+      "analysis": "记叙苏州市民抗争及五义士遇难，强调普通人在国家中的分量。文中年份各版本有异；事件一般记作1626年，此处按所列版本保留「丁卯」。",
+      "source": "https://gwgz.5000yan.com/zhangpo/12012.html"
+    }
+  ],
+  "guiyouguang": [
+    {
+      "title": "《项脊轩志》",
+      "type": "古文",
+      "classical": "项脊轩，旧南阁子也。室仅方丈，可容一人居。百年老屋，尘泥渗漉，雨泽下注；每移案，顾视无可置者。又北向，不能得日，日过午已昏。余稍为修葺，使不上漏。前辟四窗，垣墙周庭，以当南日，日影反照，室始洞然。又杂植兰桂竹木于庭，旧时栏楯，亦遂增胜。借书满架，偃仰啸歌，冥然兀坐，万籁有声；而庭阶寂寂，小鸟时来啄食，人至不去。三五之夜，明月半墙，桂影斑驳，风移影动，珊珊可爱。\n\n然余居于此，多可喜，亦多可悲。先是庭中通南北为一。迨诸父异爨，内外多置小门墙，往往而是，东犬西吠，客逾庖而宴，鸡栖于厅。庭中始为篱，已为墙，凡再变矣。家有老妪，尝居于此。妪，先大母婢也，乳二世，先妣抚之甚厚。室西连于中闺，先妣尝一至。妪每谓余曰：“某所，而母立于兹。”妪又曰：“汝姊在吾怀，呱呱而泣；娘以指叩门扉曰：‘儿寒乎？欲食乎？’吾从板外相为应答。”语未毕，余泣，妪亦泣。余自束发，读书轩中，一日，大母过余曰：“吾儿，久不见若影，何竟日默默在此，大类女郎也？”比去，以手阖门，自语曰：“吾家读书久不效，儿之成，则可待乎！”顷之，持一象笏至，曰：“此吾祖太常公宣德间执此以朝，他日汝当用之！”瞻顾遗迹，如在昨日，令人长号不自禁。\n\n轩东，故尝为厨，人往，从轩前过。余扃牖而居，久之，能以足音辨人。轩凡四遭火，得不焚，殆有神护者。\n\n项脊生曰：“蜀清守丹穴，利甲天下，其后秦皇帝筑女怀清台；刘玄德与曹操争天下，诸葛孔明起陇中。方二人之昧昧于一隅也，世何足以知之？余区区处败屋中，方扬眉、瞬目，谓有奇景。人知之者，其谓与坎井之蛙何异？”\n\n余既为此志，后五年，吾妻来归，时至轩中，从余问古事，或凭几学书。吾妻归宁，述诸小妹语曰：“闻姊家有阁子，且何谓阁子也？”其后六年，吾妻死，室坏不修。其后二年，余久卧病无聊，乃使人复葺南阁子，其制稍异于前。然自后余多在外，不常居。\n\n庭有枇杷树，吾妻死之年所手植也，今已亭亭如盖矣。",
+      "vernacular": "项脊轩是原来的南阁子，屋子只有一丈见方，容一人居住。百年老屋漏下尘土和雨水，挪动桌案时环顾四周竟无处安放；屋子朝北，不见阳光，过午便暗了。我略加修缮，不再漏雨，又开四窗，在庭院周围筑墙反射南面的日光，屋里才明亮。庭中杂植兰、桂、竹木，旧栏杆也更好看了。借来的书摆满书架，我或吟咏，或静坐；院中寂静，鸟儿来啄食，见人也不飞走。月圆之夜，月光映着半墙，桂树影子随风摇动，十分可爱。\n\n然而我住在这里，喜事多，悲事也多。以前院子南北相通，叔伯分家后，内外小门和墙随处可见：东家的狗跑到西家叫，客人穿过厨房赴宴，鸡在厅中栖息。院里先筑篱笆，后来又改成墙，变了两次。家有一位老仆妇，是已故祖母的婢女，哺育过两代人，亡母待她很好。屋西连着内室，母亲曾来过。老妇常对我说：“你母亲曾站在这里。”她又回忆：姐姐在她怀里啼哭，母亲敲门问孩子冷不冷、想不想吃东西，她在门外应答。话没说完，我哭了，她也哭了。我从束发之年在轩里读书，一天祖母来看我，问为何整天安静得像个姑娘。临走她掩门自语，盼望我能有出息；不久拿来象牙笏板，说这是她祖父当年上朝所用，希望我将来也能用上。回想往事如在昨日，令人忍不住大哭。\n\n轩东从前是厨房，人们往来都从门前经过。我关窗居住，久而久之，能凭脚步声辨认来人。轩曾四次遭遇火灾而未烧毁，仿佛有神灵护佑。\n\n项脊生说：巴蜀的清守着丹砂矿而富甲天下，秦始皇后来为她筑台；刘备与曹操争天下，诸葛亮从隆中出山。他们尚未显达、居于一隅时，世人怎能知道？我居于破屋，却为眼前景物自得，别人知道了，恐怕会笑我像井底之蛙吧。\n\n写此志五年后，我的妻子嫁来，常到轩中向我问古事，有时靠着桌案练字。她回娘家时转述妹妹们的话：“听说姐姐家有阁子，阁子是什么呢？”又过六年妻子去世，屋子破了也没有修。两年后我久病无聊，才让人重新修葺南阁，形制与以前略有不同。从此我常在外面，不常住在这里。\n\n院里有一棵枇杷树，是妻子去世那年她亲手种的，如今已枝叶高大如伞。",
+      "analysis": "从书斋的日常景物写到母亲、祖母和妻子，末尾枇杷树寄托深沉的怀念。",
+      "source": "https://www.gushici.net/shici/09/62106.html"
+    }
+  ],
+  "sudongpo": [
+    {
+      "title": "《水调歌头·明月几时有》",
+      "type": "古诗文",
+      "classical": "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。\n我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。\n转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？\n人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
+      "vernacular": "明月从什么时候开始有？举杯问苍天。不知天上宫殿今夜是哪一年。我想乘风回去，又担心高处宫殿寒冷难耐；起舞赏影，怎比得上人间。\n月亮转过朱阁，低照窗户，照着未眠的人。它不该有怨恨，为何偏在人离别时圆？人有悲欢离合，月有阴晴圆缺，自古难以两全。只愿亲人长久平安，远隔千里也能共赏明月。"
+    }
+  ],
+  "dongpopark": [
+    {
+      "title": "《水调歌头·明月几时有》",
+      "type": "古诗文",
+      "classical": "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。\n我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。\n转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？\n人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
+      "vernacular": "明月从什么时候开始有？举杯问苍天。不知天上宫殿今夜是哪一年。我想乘风回去，又担心高处宫殿寒冷难耐；起舞赏影，怎比得上人间。\n月亮转过朱阁，低照窗户，照着未眠的人。它不该有怨恨，为何偏在人离别时圆？人有悲欢离合，月有阴晴圆缺，自古难以两全。只愿亲人长久平安，远隔千里也能共赏明月。"
+    }
+  ],
+  "hainan-sudongpo": [
+    {
+      "title": "《水调歌头·明月几时有》",
+      "type": "古诗文",
+      "classical": "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。\n我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。\n转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？\n人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
+      "vernacular": "明月从什么时候开始有？举杯问苍天。不知天上宫殿今夜是哪一年。我想乘风回去，又担心高处宫殿寒冷难耐；起舞赏影，怎比得上人间。\n月亮转过朱阁，低照窗户，照着未眠的人。它不该有怨恨，为何偏在人离别时圆？人有悲欢离合，月有阴晴圆缺，自古难以两全。只愿亲人长久平安，远隔千里也能共赏明月。"
+    }
+  ],
+  "baijuyi": [
+    {
+      "title": "《钱塘湖春行》",
+      "type": "古诗文",
+      "classical": "孤山寺北贾亭西，水面初平云脚低。\n几处早莺争暖树，谁家新燕啄春泥。\n乱花渐欲迷人眼，浅草才能没马蹄。\n最爱湖东行不足，绿杨阴里白沙堤。",
+      "vernacular": "行至孤山寺北、贾亭之西，湖水初涨与岸齐平，云层低垂。早莺争栖向阳的树，新燕衔泥筑巢。繁花渐使人眼花，浅草刚能盖住马蹄。最爱湖东美景，走不够绿杨掩映的白沙堤。"
+    }
+  ],
+  "fangheting": [
+    {
+      "title": "《山园小梅·其一》",
+      "type": "古诗文",
+      "classical": "众芳摇落独暄妍，占尽风情向小园。\n疏影横斜水清浅，暗香浮动月黄昏。\n霜禽欲下先偷眼，粉蝶如知合断魂。\n幸有微吟可相狎，不须檀板共金樽。",
+      "vernacular": "群花凋落，只有梅花在小园中明媚开放。稀疏的影子横斜在清浅水面，幽香在月色黄昏里浮动。寒鸟欲落先窥看，粉蝶若知道也会倾心。幸好能低吟相伴，不必借歌板和酒杯。"
+    }
+  ],
+  "shenyuan": [
+    {
+      "title": "《钗头凤·红酥手》",
+      "type": "古诗文",
+      "classical": "红酥手，黄縢酒，满城春色宫墙柳。\n东风恶，欢情薄。一怀愁绪，几年离索。错，错，错。\n春如旧，人空瘦，泪痕红浥鲛绡透。\n桃花落，闲池阁。山盟虽在，锦书难托。莫，莫，莫。",
+      "vernacular": "红润柔软的手捧着黄縢美酒，满城春色中宫墙边柳枝摇曳。春风虽来，欢聚却短，满怀愁绪，数年离散，只有一叹再叹。春景依旧，人却消瘦，泪水浸透手帕。桃花飘落，池阁寂寥；盟誓虽在，却难寄书信，只能作罢。"
+    }
+  ],
+  "wentianxiang": [
+    {
+      "title": "《过零丁洋》",
+      "type": "古诗文",
+      "classical": "辛苦遭逢起一经，干戈寥落四周星。\n山河破碎风飘絮，身世浮沉雨打萍。\n惶恐滩头说惶恐，零丁洋里叹零丁。\n人生自古谁无死？留取丹心照汗青。",
+      "vernacular": "因研习经书入仕，历经艰难，战争已持续四年。山河破碎如风中柳絮，个人身世如雨中浮萍。惶恐滩头叹惶恐，零丁洋里悲孤零。人自古谁能不死？愿留下赤诚的心照耀史册。"
+    }
+  ],
+  "sd-taibailou": [
+    {
+      "title": "《静夜思》",
+      "type": "古诗文",
+      "classical": "床前明月光，疑是地上霜。\n举头望明月，低头思故乡。",
+      "vernacular": "床前洒下明亮月光，仿佛地上铺了一层霜。抬头望着明月，低下头来思念故乡。"
+    }
+  ],
+  "sc-libaiguli": [
+    {
+      "title": "《静夜思》",
+      "type": "古诗文",
+      "classical": "床前明月光，疑是地上霜。\n举头望明月，低头思故乡。",
+      "vernacular": "床前洒下明亮月光，仿佛地上铺了一层霜。抬头望着明月，低下头来思念故乡。"
+    }
+  ],
+  "ah-libai": [
+    {
+      "title": "《静夜思》",
+      "type": "古诗文",
+      "classical": "床前明月光，疑是地上霜。\n举头望明月，低头思故乡。",
+      "vernacular": "床前洒下明亮月光，仿佛地上铺了一层霜。抬头望着明月，低下头来思念故乡。"
+    }
+  ],
+  "sc-dufucaotang": [
+    {
+      "title": "《春望》",
+      "type": "古诗文",
+      "classical": "国破山河在，城春草木深。\n感时花溅泪，恨别鸟惊心。\n烽火连三月，家书抵万金。\n白头搔更短，浑欲不胜簪。",
+      "vernacular": "国都沦陷，山河仍在；春天的城中草木深深。感伤时局，花儿似也溅泪；痛恨离别，鸟鸣令人心惊。战火连绵三月，一封家信珍贵胜过万金。忧愁中搔抓白发，稀疏得几乎插不住簪子。"
+    }
+  ],
+  "hn-dufu": [
+    {
+      "title": "《春望》",
+      "type": "古诗文",
+      "classical": "国破山河在，城春草木深。\n感时花溅泪，恨别鸟惊心。\n烽火连三月，家书抵万金。\n白头搔更短，浑欲不胜簪。",
+      "vernacular": "国都沦陷，山河仍在；春天的城中草木深深。感伤时局，花儿似也溅泪；痛恨离别，鸟鸣令人心惊。战火连绵三月，一封家信珍贵胜过万金。忧愁中搔抓白发，稀疏得几乎插不住簪子。"
+    }
+  ],
+  "sc-chenziang": [
+    {
+      "title": "《登幽州台歌》",
+      "type": "古诗文",
+      "classical": "前不见古人，后不见来者。\n念天地之悠悠，独怆然而涕下。",
+      "vernacular": "向前看不到古代贤明的人，向后看不到后来的知音。想到天地无限久远，独自悲伤地流下眼泪。"
+    }
+  ],
+  "sc-wangjianglou": [
+    {
+      "title": "《送友人》",
+      "type": "古诗文",
+      "classical": "水国蒹葭夜有霜，月寒山色共苍苍。\n谁言千里自今夕，离梦杳如关塞长。",
+      "vernacular": "水乡的芦苇在夜里沾上秋霜，寒月与山色一片苍茫。谁想到从今夜起相隔千里，离别后的梦也像关塞道路一样遥远。"
+    }
+  ],
+  "sd-liqingzhao": [
+    {
+      "title": "《如梦令·常记溪亭日暮》",
+      "type": "古诗文",
+      "classical": "常记溪亭日暮，沉醉不知归路。\n兴尽晚回舟，误入藕花深处。\n争渡，争渡，惊起一滩鸥鹭。",
+      "vernacular": "常记得溪边亭中游玩到日暮，沉醉得忘了归路。尽兴后晚归，船误入荷花深处。急着划出去，惊起一滩鸥鹭。"
+    }
+  ],
+  "sd-baotu": [
+    {
+      "title": "《如梦令·常记溪亭日暮》",
+      "type": "古诗文",
+      "classical": "常记溪亭日暮，沉醉不知归路。\n兴尽晚回舟，误入藕花深处。\n争渡，争渡，惊起一滩鸥鹭。",
+      "vernacular": "常记得溪边亭中游玩到日暮，沉醉得忘了归路。尽兴后晚归，船误入荷花深处。急着划出去，惊起一滩鸥鹭。"
+    }
+  ],
+  "sd-daminghu": [
+    {
+      "title": "《西江月·夜行黄沙道中》",
+      "type": "古诗文",
+      "classical": "明月别枝惊鹊，清风半夜鸣蝉。稻花香里说丰年，听取蛙声一片。\n七八个星天外，两三点雨山前。旧时茅店社林边，路转溪桥忽见。",
+      "vernacular": "明月照着枝头，惊动喜鹊；半夜清风中传来蝉鸣。稻花香里人们谈论丰收，耳边蛙声一片。天外星光零落，山前落下几点雨；绕过溪桥，往日土地庙树林边的茅店忽然出现。"
+    }
+  ],
+  "jx-zenggong": [
+    {
+      "title": "《城南》",
+      "type": "古诗文",
+      "classical": "雨过横塘水满堤，乱山高下路东西。\n一番桃李花开尽，惟有青青草色齐。",
+      "vernacular": "雨后横塘水涨至堤岸，群山高低错落，道路东西交错。桃花李花都已开过谢尽，只有青草整齐地铺展。"
+    }
+  ],
+  "hb-quyuan": [
+    {
+      "title": "《离骚》·节选",
+      "type": "古诗文",
+      "classical": "路曼曼其修远兮，吾将上下而求索。",
+      "vernacular": "道路漫长而遥远，我将不懈地上下探求。",
+      "analysis": "节选表现诗人执着追寻理想的精神。"
+    }
+  ]
+};
+const SUPPLEMENTAL_WORKS = {
+  "huanggongwang": [
+    {"src":"images/photos/huanggongwang-shengshan.jpg", "cap":"黄公望《富春山居图·剩山图》 · 浙江省博物馆藏", "type":"painting", "source":"https://commons.wikimedia.org/wiki/File:Dwelling_in_the_Fuchun_Mountains_(first_half).JPG"}
+  ],
+  "tangyinyuan": [
+    {
+      "src": "images/photos/tangyin-met-45773.jpg",
+      "cap": "唐寅《诗画》卷（一开） · 美国大都会艺术博物馆",
+      "type": "painting",
+      "source": "https://www.metmuseum.org/art/collection/search/45773"
+    }
+  ],
+  "dongqichang": [
+    {
+      "src": "images/photos/dongqichang-met-48949.jpg",
+      "cap": "董其昌《溪山樾馆图》 · 美国大都会艺术博物馆",
+      "type": "painting",
+      "source": "https://www.metmuseum.org/art/collection/search/48949"
+    },
+    {
+      "src": "images/photos/dongqichang-met-48956.jpg",
+      "cap": "董其昌《行草致陈继儒书》 · 美国大都会艺术博物馆",
+      "type": "calligraphy",
+      "source": "https://www.metmuseum.org/art/collection/search/48956"
+    }
+  ],
+  "mifu": [
+    {
+      "src": "images/photos/mifu-met-39919.jpg",
+      "cap": "米芾《草书吴江舟中诗》卷（局部） · 美国大都会艺术博物馆",
+      "type": "calligraphy",
+      "source": "https://www.metmuseum.org/art/collection/search/39919"
+    }
+  ],
+  "chenhongshou": [
+    {
+      "src": "images/photos/chenhongshou-met-44873.jpg",
+      "cap": "陈洪绶《山水花鸟人物图》扇册（一开） · 美国大都会艺术博物馆",
+      "type": "painting",
+      "source": "https://www.metmuseum.org/art/collection/search/44873"
+    }
+  ]
+};
+
 /* ================= 实景照片（维基共享资源，构建脚本注入） ================= */
 /* ==PHOTOS-START== */
 const PHOTOS = {
+  "zhangpu-residence": [
+    {src:"images/photos/zhangpu-residence.jpg",cap:"张溥宅庭院（缩小）",credit:"Cangminzho · CC BY-SA 4.0",source:"https://commons.wikimedia.org/wiki/File:%E5%BC%A0%E6%BA%A5%E5%AE%85_%E2%80%9C%E5%9B%9B%E6%B0%B4%E5%BD%92%E5%A0%82%E2%80%9D.jpg",license:"https://creativecommons.org/licenses/by-sa/4.0/"}
+  ],
+  "wurenmu": [
+    {src:"images/photos/wurenmu.jpg",cap:"五人墓享堂中的墓碑",credit:"猫猫的日记本 · CC BY-SA 3.0",source:"https://commons.wikimedia.org/wiki/File:Tomb_of_the_Five_Men_03_2012-03.JPG",license:"https://creativecommons.org/licenses/by-sa/3.0/"}
+  ],
   "luxun-shanghai": [
     {src:"images/photos/luxun-shanghai-1.jpg",cap:"上海鲁迅纪念馆",credit:"Gisling · CC BY-SA 3.0"},
     {src:"images/photos/luxun-shanghai-2.jpg",cap:"Shanghai Luxun Museum",credit:"user:Mountain · CC BY-SA 3.0"}
@@ -11125,11 +11388,6 @@ const PHOTOS = {
   "fubaoshi": [
     {src:"images/photos/fubaoshi-1.jpg",cap:"傅抱石纪念馆 - panoramio",credit:"zhanyoun · CC BY-SA 3.0"},
     {src:"images/photos/fubaoshi-2.jpg",cap:"傅抱石纪念馆 - panoramio",credit:"zhanyoun · CC BY-SA 3.0"}
-  ],
-  "tangyinyuan": [
-    {src:"images/photos/tangyinyuan-1.jpg",cap:"Tang Yin - 唐寅 (1470 - 1524)",credit:"Li Yueyun, 1898. · Public domain"},
-    {src:"images/photos/tangyinyuan-2.jpg",cap:"唐寅詩 - panoramio",credit:"ping lin · CC BY-SA 3.0"},
-    {src:"images/photos/tangyinyuan-3.jpg",cap:"唐寅文会图",credit:"Tang Yin · Public domain"}
   ],
   "fanzhongyan": [
     {src:"images/photos/fanzhongyan-1.jpg",cap:"苏州天平山-天平山庄",credit:"云在动 · CC BY-SA 4.0"},
@@ -11389,12 +11647,6 @@ const PHOTOS = {
     {src:"images/photos/guiyouguang-2.jpg",cap:"归有光墓081944",credit:"Augustokremo · CC BY-SA 4.0"},
     {src:"images/photos/guiyouguang-3.jpg",cap:"震川园081642",credit:"Augustokremo · CC BY-SA 4.0"}
   ],
-  "huanggongwang": [
-    {src:"images/photos/huanggongwang-1.png",cap:"朱虚仿黄公望山水扇",credit:"Public domain"},
-    {src:"images/photos/huanggongwang-2.png",cap:"王翚临黄公望富春山居图卷",credit:"Wang Hui · Public domain"},
-    {src:"images/photos/huanggongwang-3.png",cap:"沈周仿黄公望富春山居图卷",credit:"Shen Zhou / After Huang Gongwang · Publi"},
-    {src:"images/photos/huanggongwang-4.png",cap:"黄公望赵雍合作山水卷",credit:"Huang Gongwang / Zhao Yong · Public doma"}
-  ],
   "pearlbuck": [
     {src:"images/photos/pearlbuck-1.jpg",cap:"Pearl Buck Former Residence in Nanjing University",credit:"Alexandquan · CC BY-SA 4.0"},
     {src:"images/photos/pearlbuck-2.jpg",cap:"Former Residence of Pearl S. Buck in Nanjing 03 2012-11",credit:"猫猫的日记本 · CC BY-SA 3.0"},
@@ -11448,12 +11700,6 @@ const PHOTOS = {
     {src:"images/photos/qianliu-1.jpg",cap:"Tomb of Qian Liu, 2015-02-14 08",credit:"Siyuwj · CC BY-SA 4.0"},
     {src:"images/photos/qianliu-2.jpg",cap:"Tomb of Qian Liu, 2015-02-14 10",credit:"Siyuwj · CC BY-SA 4.0"}
   ],
-  "chenhongshou": [
-    {src:"images/photos/chenhongshou-1.jpg",cap:"陈洪绶 花鸟草虫册 3",credit:"Chen Hongshou · Public domain"},
-    {src:"images/photos/chenhongshou-2.jpg",cap:"陈洪绶 花鸟草虫册 6",credit:"Chen Hongshou · Public domain"},
-    {src:"images/photos/chenhongshou-3.jpg",cap:"陈洪绶 花鸟草虫册 9",credit:"Chen Hongshou · Public domain"},
-    {src:"images/photos/chenhongshou-4.jpg",cap:"陈洪绶 花鸟草虫册 10",credit:"Chen Hongshou · Public domain"}
-  ],
   "zhouenlai-zu": [
     {src:"images/photos/zhouenlai-zu-1.jpg",cap:"Former Residence of Zhou Enlai's Ancestors 09 2012-07",credit:"猫猫的日记本 · CC BY-SA 3.0"},
     {src:"images/photos/zhouenlai-zu-2.jpg",cap:"Former Residence of Zhou Enlai's Ancestors 01 2012-07",credit:"猫猫的日记本 · CC BY-SA 3.0"},
@@ -11480,12 +11726,6 @@ const PHOTOS = {
     {src:"images/photos/kongmiao-2.jpg",cap:"Temple of Southern Confucianism, 2021-09-22 05",credit:"Siyuwj · CC BY-SA 4.0"},
     {src:"images/photos/kongmiao-3.jpg",cap:"Temple of Southern Confucianism, 2021-09-22 07",credit:"Siyuwj · CC BY-SA 4.0"},
     {src:"images/photos/kongmiao-4.jpg",cap:"Temple of Southern Confucianism, 2021-09-22 06",credit:"Siyuwj · CC BY-SA 4.0"}
-  ],
-  "wangxizhi-mu": [
-    {src:"images/photos/wangxizhi-mu-1.jpg",cap:"元 錢選 王羲之觀鵝圖 卷-Wang Xizhi watching geese MET DP273822",credit:"Qian Xuan · CC0"},
-    {src:"images/photos/wangxizhi-mu-2.jpg",cap:"Wang Xizhi by Qian Xuan",credit:"Qian Xuan 錢選 (ca. 1235–before 1307) · Pu"},
-    {src:"images/photos/wangxizhi-mu-3.jpg",cap:"Wang Xizhi love goose",credit:"shizhao (talk)拍摄，画者不明 · Public domain"},
-    {src:"images/photos/wangxizhi-mu-4.jpg",cap:"The Calligraphy Model Sunny after Snow by Wang Xizhi",credit:"After Wang Xizhi · Public domain"}
   ],
   "qijiguang": [
     {src:"images/photos/qijiguang-2.jpg",cap:"The Memorial Temple of Qi Jiguang 23 2017-01",credit:"猫猫的日记本 · CC BY-SA 4.0"}
@@ -11530,13 +11770,6 @@ const PHOTOS = {
   "aiqing": [
     {src:"images/photos/aiqing-1.jpg",cap:"七宝中学艾青亭",credit:"WQL · CC BY 3.0"},
     {src:"images/photos/aiqing-2.jpg",cap:"Karamay Ai Qing",credit:"Rart · CC BY-SA 4.0"}
-  ],
-  "mifu": [
-    {src:"images/photos/mifu-1.jpg",cap:"南宋拓米芾方圆庵记碑册 18",credit:"Mi Fu · Public domain"},
-    {src:"images/photos/mifu-2.jpg",cap:"南宋拓米芾方圆庵记碑册 3",credit:"Mi Fu · Public domain"}
-  ],
-  "xubeihong": [
-    {src:"images/photos/xubeihong-1.jpg",cap:"八十七神仙卷",credit:"AnonymousUnknown author · Public domain"}
   ],
   "jiezhiyuan": [
     {src:"images/photos/jiezhiyuan-1.jpg",cap:"芥子园画譜 竹谱-“Bamboo” section, from the Mustard Seed Garden Manual",credit:"Wang Gai · CC0"},
@@ -13487,11 +13720,14 @@ function toggleDesc(btn) {
 function renderExtraSection(s) {
   var out = '';
   /* 画家/书法家：展示作品图片（works 数组） */
-  if (s.works && s.works.length) {
-    var isPaint = /画家|绘画|国画|油画|泼墨/.test(s.role || '');
-    out += '<div class="extra-section"><div class="sec">' + (isPaint ? '代 表 作 画' : '代 表 书 法') + '</div>';
+  var works = (s.works || []).concat(SUPPLEMENTAL_WORKS[s.id] || []);
+  if (works.length) {
+    var isPaint = works.some(function (w) { return w.type === 'painting'; });
+    var isCalligraphy = works.some(function (w) { return w.type === 'calligraphy'; });
+    var workHeading = isPaint && isCalligraphy ? '代 表 书 画' : (isPaint ? '代 表 作 画' : '代 表 书 法');
+    out += '<div class="extra-section"><div class="sec">' + workHeading + '</div>';
     out += '<div class="works">';
-    s.works.forEach(function (w) {
+    works.forEach(function (w) {
       out += '<div class="work" ondblclick="openWorkImage(event, this)" title="双击在地图中央放大">';
       out += '<img src="' + (w.src || '') + '" alt="' + (w.cap || s.name) + '" loading="lazy" onerror="this.parentElement.style.display=&quot;none&quot;">';
       out += '<div class="wcap">' + (w.cap || s.name) + (w.source ? ' · <a href="' + w.source + '" target="_blank" rel="noopener noreferrer">图片来源</a>' : '') + '</div></div>';
@@ -13499,15 +13735,20 @@ function renderExtraSection(s) {
     out += '</div></div>';
   }
   /* 诗人/散文家：展示诗文、古文白话对照与解析（writings 数组） */
-  if (s.writings && s.writings.length) {
+  var additions = SUPPLEMENTAL_WRITINGS[s.id] || [];
+  var writings = additions.concat((s.writings || []).filter(function (old) {
+    return !additions.some(function (w) { return w.title === old.title; });
+  }));
+  if (writings.length) {
     out += '<div class="extra-section"><div class="sec">代 表 诗 文</div><div class="writings">';
-    s.writings.forEach(function (w) {
-      out += '<div class="writing">';
-      out += '<div class="wtitle"><span>' + (w.title || '') + '</span><span class="wtype">' + (w.type || '诗文') + '</span></div>';
+    writings.forEach(function (w) {
+      var longText = (w.classical || '').length > 500;
+      out += longText ? '<details class="writing"><summary class="wtitle"><span>' + (w.title || '') + ' · 展开原文与白话</span><span class="wtype">' + (w.type || '诗文') + '</span></summary>' : '<div class="writing"><div class="wtitle"><span>' + (w.title || '') + '</span><span class="wtype">' + (w.type || '诗文') + '</span></div>';
       if (w.classical) out += '<div class="classical">' + w.classical + '</div>';
       if (w.vernacular) out += '<div class="vernacular">『白话』' + w.vernacular + '</div>';
       if (w.analysis) out += '<div class="analysis">『解析』' + w.analysis + '</div>';
-      out += '</div>';
+      if (w.source) out += '<div class="analysis"><a href="' + w.source + '" target="_blank" rel="noopener noreferrer">原文参考</a> · 白话译文为本站编写</div>';
+      out += longText ? '</details>' : '</div>';
     });
     out += '</div></div>';
   }
@@ -13529,7 +13770,7 @@ function renderDetail(id) {
         + ' ondblclick="toggleImgFull(this)" title="双击在地图中央放大"'
         + ' onerror="this.parentElement.style.display=&quot;none&quot;">'
         + '<div class="cap"><span>' + (p.cap || s.name) + '</span>'
-        + '<span class="crd">' + (p.credit || '') + '</span></div></div>';
+        + '<span class="crd">' + (p.source ? '<a href="' + p.source + '" target="_blank" rel="noopener noreferrer">' + (p.credit || '图片来源') + '</a>' : (p.credit || '')) + (p.license ? ' · <a href="' + p.license + '" target="_blank" rel="noopener noreferrer">许可</a>' : '') + '</span></div></div>';
     }).join('')
     + '</div>'
     + (many ? '<button class="nav prev" onclick="slideBy(-1)">‹</button><button class="nav next" onclick="slideBy(1)">›</button>' : '')
